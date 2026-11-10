@@ -1,0 +1,792 @@
+{
+ "version": "2026-11-10",
+ "entornos": {
+  "vivienda": "Vivienda",
+  "comercio_oficina": "Comercio u oficina",
+  "industria": "Industria",
+  "faena_minera": "Faena minera",
+  "via_publica": "Vía pública",
+  "no_claro": "No claro"
+ },
+ "categorias": {
+  "medidor_empalme": {
+   "nombre": "Medidor y empalme",
+   "familia": "electrico",
+   "subtipos": [
+    "individual",
+    "concentrado"
+   ],
+   "rasgos": [
+    "visor o mica con display de energía (kWh) o disco giratorio",
+    "caja de empalme con visor, individual o en un banco de cajas, no un gabinete con varios interruptores",
+    "acometida que llega desde la red de distribución (poste o subterránea)",
+    "sello o precinto de la distribuidora",
+    "protección o limitador del empalme"
+   ],
+   "normas": [
+    "RIC",
+    "DS 594",
+    "DS 132"
+   ],
+   "no_foto": [
+    "Capacidad del empalme frente a la potencia declarada (RIC N°1 · 5.3)",
+    "Curva y poder de corte del limitador (RIC N°1 · 8.1–8.2)",
+    "Distancia a la puerta de acceso, semicírculo de 15 m (RIC N°1 · 7.2)",
+    "Comunicación de energización inscrita en la SEC (RIC N°1 · 5.2)",
+    "Acometida que no atraviese propiedades vecinas (RIC N°1 · 7.1)"
+   ]
+  },
+  "tablero": {
+   "nombre": "Tablero eléctrico",
+   "familia": "electrico",
+   "subtipos": [
+    "distribucion",
+    "fuerza",
+    "control"
+   ],
+   "rasgos": [
+    "interruptores automáticos, diferenciales o fusibles montados en fila",
+    "barras o borneras de distribución",
+    "varios circuitos que salen del gabinete",
+    "puerta exterior o cubierta cubre equipos"
+   ],
+   "normas": [
+    "RIC",
+    "DS 594",
+    "DS 132"
+   ],
+   "no_foto": [
+    "Resistencia de la puesta a tierra y continuidad de protecciones (medición)",
+    "Aislamiento de conductores (medición)",
+    "Ajuste y selectividad de las protecciones",
+    "Grado IP real de la envolvente",
+    "Apriete y temperatura de conexiones (termografía)"
+   ]
+  },
+  "sala_electrica": {
+   "nombre": "Sala eléctrica",
+   "familia": "electrico",
+   "subtipos": [],
+   "rasgos": [
+    "recinto cerrado con varios tableros, celdas o CCM",
+    "puerta de acceso con señal de riesgo eléctrico",
+    "equipos de potencia de gran tamaño"
+   ],
+   "normas": [
+    "RIC",
+    "DS 594",
+    "DS 132"
+   ],
+   "no_foto": [
+    "Resistencia de puesta a tierra y aislamiento (medición)",
+    "Declaración e inscripción de la instalación en la SEC"
+   ]
+  },
+  "transformador": {
+   "nombre": "Transformador",
+   "familia": "electrico",
+   "subtipos": [
+    "poste",
+    "piso"
+   ],
+   "rasgos": [
+    "cuba metálica con aletas o radiadores",
+    "aisladores pasatapas en la parte superior o lateral",
+    "placa de características o montaje en poste o losa"
+   ],
+   "normas": [
+    "RIC",
+    "DS 594",
+    "DS 132"
+   ],
+   "no_foto": [
+    "Resistencia de puesta a tierra y aislamiento (medición)",
+    "Declaración e inscripción de la instalación en la SEC"
+   ]
+  },
+  "canalizacion": {
+   "nombre": "Canalización",
+   "familia": "electrico",
+   "subtipos": [],
+   "rasgos": [
+    "tubos, ductos o bandejas que llevan conductores",
+    "cajas de paso o derivación",
+    "recorrido de cables por muro, techo o estructura"
+   ],
+   "normas": [
+    "RIC",
+    "DS 594",
+    "DS 132"
+   ],
+   "no_foto": [
+    "Resistencia de puesta a tierra y aislamiento (medición)",
+    "Declaración e inscripción de la instalación en la SEC"
+   ]
+  },
+  "grupo_electrogeno": {
+   "nombre": "Grupo electrógeno",
+   "familia": "electrico",
+   "subtipos": [],
+   "rasgos": [
+    "motor de combustión acoplado a un alternador",
+    "tablero de control o de transferencia",
+    "estanque de combustible o escape"
+   ],
+   "normas": [
+    "RIC",
+    "DS 594",
+    "DS 132"
+   ],
+   "no_foto": [
+    "Resistencia de puesta a tierra y aislamiento (medición)",
+    "Declaración e inscripción de la instalación en la SEC"
+   ]
+  },
+  "bodega_sustancias": {
+   "nombre": "Sustancias peligrosas",
+   "familia": "sustancias",
+   "subtipos": [
+    "bodega",
+    "patio"
+   ],
+   "rasgos": [
+    "tambores, bidones, sacos u otros envases de productos",
+    "rótulos, etiquetas o pictogramas de peligro",
+    "estanterías, pallets o zona destinada a almacenar"
+   ],
+   "normas": [
+    "DS 43",
+    "DS 594"
+   ],
+   "no_foto": [
+    "Hojas de datos de seguridad y compatibilidad real de los productos",
+    "Cantidades almacenadas frente a los umbrales del DS 43",
+    "Autorización sanitaria de la bodega",
+    "Plan de emergencia y capacitación del personal",
+    "Ventilación y concentraciones ambientales (medición)"
+   ]
+  },
+  "cilindros_gas": {
+   "nombre": "Cilindros de gas",
+   "familia": "sustancias",
+   "subtipos": [],
+   "rasgos": [
+    "cilindros a presión",
+    "válvula o capuchón en la parte superior",
+    "cadena, jaula o soporte de sujeción"
+   ],
+   "normas": [
+    "DS 43",
+    "DS 594"
+   ],
+   "no_foto": [
+    "Hojas de datos de seguridad y cantidades almacenadas",
+    "Autorización sanitaria"
+   ]
+  },
+  "estanque": {
+   "nombre": "Estanque",
+   "familia": "sustancias",
+   "subtipos": [],
+   "rasgos": [
+    "estanque o tanque de líquido",
+    "pretil o dique alrededor",
+    "cañerías, válvulas o conexiones de llenado"
+   ],
+   "normas": [
+    "DS 43",
+    "DS 594"
+   ],
+   "no_foto": [
+    "Hojas de datos de seguridad y cantidades almacenadas",
+    "Autorización sanitaria"
+   ]
+  },
+  "correa_transportadora": {
+   "nombre": "Correa transportadora",
+   "familia": "faena",
+   "subtipos": [],
+   "rasgos": [
+    "banda continua apoyada sobre polines",
+    "tambor motriz o de cola en un extremo",
+    "estructura longitudinal que soporta la banda"
+   ],
+   "normas": [
+    "DS 132",
+    "DS 594"
+   ],
+   "no_foto": [
+    "Funcionamiento real de la parada de emergencia (prueba)",
+    "Procedimiento de operación, mantención e inspección (DS 132 · art. 113)",
+    "Alarma sonora y luminosa antes de partir (DS 132 · art. 116)",
+    "Ruido y polvo (mediciones del DS 594)",
+    "Bloqueo y permisos de trabajo"
+   ]
+  },
+  "maquina": {
+   "nombre": "Máquina",
+   "familia": "faena",
+   "subtipos": [],
+   "rasgos": [
+    "poleas, engranajes, ejes u otras partes móviles",
+    "motor o accionamiento",
+    "carcasa o estructura de la máquina"
+   ],
+   "normas": [
+    "DS 132",
+    "DS 594"
+   ],
+   "no_foto": [
+    "Ruido, polvo y sílice (mediciones del DS 594)",
+    "Procedimientos de bloqueo y permisos de trabajo"
+   ]
+  },
+  "area_trabajo": {
+   "nombre": "Área de trabajo",
+   "familia": "faena",
+   "subtipos": [],
+   "rasgos": [
+    "pisos y pasillos de circulación",
+    "herramientas, materiales o equipos de trabajo",
+    "puestos de trabajo o zona de operación"
+   ],
+   "normas": [
+    "DS 132",
+    "DS 594"
+   ],
+   "no_foto": [
+    "Ruido, polvo y sílice (mediciones del DS 594)",
+    "Procedimientos de bloqueo y permisos de trabajo"
+   ]
+  }
+ },
+ "listas": {
+  "medidor_empalme": [
+   {
+    "id": "M1",
+    "texto": "La unidad de medida se puede leer desde el exterior: visor limpio, sin opacidad ni obstrucción",
+    "sev": "baja",
+    "refs": [
+     {
+      "ref": "RIC N°1 · 7.1, 7.2",
+      "url": "https://www.sec.cl/sitio-web/wp-content/uploads/2021/01/RIC-N01-Empalmes.pdf#page=4",
+      "t": "7.1 La unidad de medida del empalme se ubicará en una posición tal que permita una fácil y expedita lectura, su control y eventuales trabajos de reparación o mantenimiento. Por su parte, las acometidas, sean aéreas o subterráneas, en ningún caso podrán atravesar propiedades vecinas, con excepción de aquellas en las que exista servidumbre de paso.\n7.2 Para construcciones habitacionales unifamiliares u otro tipo de recintos, conectados a través de un empalme único, la unidad de medida de éste deberá ubicarse en la fachada principal de la vivienda, con vista frontal desde la vía pública de acceso, permitiendo una fácil lectura desde el exterior de la propiedad e impidiéndose su manipulación por terceros, y dentro de un semicírculo de radio no superior a 15 m, con centro en la puerta de acceso desde la vía pública al punto de medición. Ver anexo 1.1"
+     }
+    ],
+    "actua": "distribuidora"
+   },
+   {
+    "id": "M2",
+    "texto": "Caja de empalme íntegra: sin roturas, perforaciones ni tapa forzada",
+    "sev": "media",
+    "refs": [
+     {
+      "ref": "RIC N°1 · 6.5",
+      "url": "https://www.sec.cl/sitio-web/wp-content/uploads/2021/01/RIC-N01-Empalmes.pdf#page=3",
+      "t": "6.5 Todas las cajas de empalme tendrán una resistencia mecánica mínima IK 09 y deberán cumplir"
+     }
+    ],
+    "actua": "cliente y distribuidora"
+   },
+   {
+    "id": "M3",
+    "texto": "Mica y caja expuestas al sol sin degradación visible (amarillamiento, fisuras, opacidad)",
+    "sev": "baja",
+    "refs": [
+     {
+      "ref": "RIC N°1 · 6.3",
+      "url": "https://www.sec.cl/sitio-web/wp-content/uploads/2021/01/RIC-N01-Empalmes.pdf#page=3",
+      "t": "6.3 Las cajas de empalme, sus micas y las canalizaciones no metálicas que queden expuestos a los rayos solares deberán tener protección UV adecuadas al ambiente donde se instalarán."
+     }
+    ],
+    "actua": "cliente y distribuidora"
+   },
+   {
+    "id": "M4",
+    "texto": "Sello o precinto de la distribuidora presente en el equipo de medida",
+    "sev": "media",
+    "refs": [
+     {
+      "ref": "Estándar de empalmes de la distribuidora",
+      "url": "",
+      "t": "El RIC N°1 punto 5.1 acepta los estándares constructivos de cada distribuidora, publicados en su web. El sello del equipo de medida lo pone y lo retira la distribuidora."
+     }
+    ],
+    "actua": "distribuidora"
+   },
+   {
+    "id": "M5",
+    "texto": "Ubicación accesible para lectura y mantenimiento: fachada, poste junto al cierre o nicho, sin vegetación u objetos que lo tapen",
+    "sev": "baja",
+    "refs": [
+     {
+      "ref": "RIC N°1 · 7.1, 7.3, 7.4",
+      "url": "https://www.sec.cl/sitio-web/wp-content/uploads/2021/01/RIC-N01-Empalmes.pdf#page=4",
+      "t": "7.1 La unidad de medida del empalme se ubicará en una posición tal que permita una fácil y expedita lectura, su control y eventuales trabajos de reparación o mantenimiento. Por su parte, las acometidas, sean aéreas o subterráneas, en ningún caso podrán atravesar propiedades vecinas, con excepción de aquellas en las que exista servidumbre de paso.\n7.3 Las unidades de medida se montarán en la fachada exterior de la edificación sí ésta queda dentro de la zona delimitada; en caso contrario, se ubicarán en un punto próximo a la línea de cierre, cumpliendo la exigencia establecida, y se montarán en una estructura construida o instalada exclusivamente para este propósito. Ver anexo 1.1\n7.4 En zonas rurales y situaciones similares, en que las condiciones de terreno y las dimensiones de los predios no posibilitan el cumplimiento estricto de las disposiciones precedentes, se deberá determinar la u"
+     }
+    ],
+    "actua": "cliente"
+   },
+   {
+    "id": "M6",
+    "texto": "Sin conexiones ni derivaciones ajenas entre la red, el medidor y el primer tablero (cables añadidos, empalmes improvisados)",
+    "sev": "alta",
+    "refs": [
+     {
+      "ref": "RIC N°1 · 7.19",
+      "url": "https://www.sec.cl/sitio-web/wp-content/uploads/2021/01/RIC-N01-Empalmes.pdf#page=7",
+      "t": "7.19 Está prohibido realizar derivaciones desde el alimentador o conductores que conectan el empalme con el primer tablero de la instalación."
+     }
+    ],
+    "actua": "cliente"
+   },
+   {
+    "id": "M7",
+    "texto": "Alimentador hacia el primer tablero canalizado en ducto, sin conductores expuestos",
+    "sev": "media",
+    "refs": [
+     {
+      "ref": "RIC N°1 · 7.15",
+      "url": "https://www.sec.cl/sitio-web/wp-content/uploads/2021/01/RIC-N01-Empalmes.pdf#page=7",
+      "t": "7.15 Para cualquier tipo de empalme, en el caso de utilizar ductos para canalizar los alimentadores destinados a unir el equipo de medida con el primer tablero de la instalación, el diámetro del ducto deberá permitir ampliar la sección de los conductores inicialmente instalados en un 100% y en ningún caso este ducto podrá ser inferior a 32 mm de diámetro."
+     }
+    ],
+    "actua": "cliente"
+   },
+   {
+    "id": "M8",
+    "texto": "Acometida, conectores y conductores sin daño del aislamiento ni señales de calentamiento",
+    "sev": "alta",
+    "refs": [
+     {
+      "ref": "RIC N°1 · 6.2",
+      "url": "https://www.sec.cl/sitio-web/wp-content/uploads/2021/01/RIC-N01-Empalmes.pdf#page=3",
+      "t": "6.2 El material del conector o terminal debe garantizar que los cambios de temperatura provocados por el ambiente o por el paso de la corriente, no ocasione puntos calientes, arcos eléctricos o falsas conexiones y garantizar la compatibilidad de los materiales empleados en la conexión."
+     }
+    ],
+    "actua": "distribuidora"
+   },
+   {
+    "id": "M9",
+    "texto": "Recinto de empalmes concentrados de uso exclusivo: sin bodega, basura, ni medidores de agua o gas",
+    "sev": "media",
+    "refs": [
+     {
+      "ref": "RIC N°1 · 7.8.2, 7.16",
+      "url": "https://www.sec.cl/sitio-web/wp-content/uploads/2021/01/RIC-N01-Empalmes.pdf#page=5",
+      "t": "7.8.2 Este recinto deberá ser destinado a este único propósito y nunca podrá alojarse con el de otros servicios tales como calderas, medidores de agua, gas, maquinaria de ascensores o de otros como almacén, cuarto de basuras, excepto lo indicado en el punto 7.16.\n7.16 Los recintos de empalmes eléctricos podrán utilizarse también para instalar en ellos los empalmes destinados a servicios de comunicaciones, los cuales deberán estar separados de los eléctricos por un panel divisorio de material no combustible, dispuesto de forma tal que no entorpezca el acceso ni la operación de ninguna de las instalaciones. En este recinto no podrán instalarse los empalmes o equipos de medida de otros servicios tales como agua potable o gas, así como tampoco podrá usarse este recinto como lugar de estadía de personal, bodega, ni como lugar de almacenamiento de ninguna especie."
+     }
+    ],
+    "actua": "administración del edificio",
+    "solo": {
+     "subtipo": "concentrado"
+    }
+   },
+   {
+    "id": "M10",
+    "texto": "Cajas de empalmes concentrados entre 0,80 m y 2,10 m del piso terminado",
+    "sev": "baja",
+    "refs": [
+     {
+      "ref": "RIC N°1 · 7.8.4",
+      "url": "https://www.sec.cl/sitio-web/wp-content/uploads/2021/01/RIC-N01-Empalmes.pdf#page=5",
+      "t": "7.8.4 Las cajas de empalme individuales dentro de los recintos de concentración de empalmes se ubicarán de modo tal que el borde inferior de ninguna de ellas quede a una altura inferior a 0,80 m, ni el borde superior de ninguna de ellas quede a una altura superior a 2,10 m, ambas cotas medidas respecto del nivel de piso terminado y tendrá una distancia mínima de sus paredes colindantes de 20 cm. También deberán tener una anchura mínima de paredes ocupadas por medidores de 1,50 m tendrá un espacio libre de 1,10 m mínimo desde la parte más saliente de las cajas de empalme hasta la pared opuesta y la puerta de acceso del recinto deberá abrir hacia el exterior y estar equipada con la cerradura. (Ver anexo 1.5)"
+     }
+    ],
+    "actua": "administración del edificio",
+    "solo": {
+     "subtipo": "concentrado"
+    }
+   }
+  ],
+  "tablero": [
+   {
+    "id": "T1",
+    "texto": "Puerta exterior y cubierta cubre equipos presentes y cerradas; las protecciones solo se alcanzan abriendo la puerta",
+    "sev": "alta",
+    "refs": [
+     {
+      "ref": "RIC N°2 · 6.1.3, 6.1.4",
+      "url": "https://www.sec.cl/sitio-web/wp-content/uploads/2021/06/RIC-N02-Tableros-Electricos-170621-2.pdf#page=8",
+      "t": "6.1.3 Todos los tableros deberán contar con una cubierta cubre equipos y con una puerta exterior. La puerta exterior será totalmente cerrada y su fijación se hará mediante bisagras en disposición vertical u horizontal. Se permite montar sobre ella luces piloto de indicación de tablero energizado, y equipos de medida u otro elemento de maniobra o control, siempre que se mantenga el grado IP de protección del tablero. La cubierta cubre equipos deberá ser del mismo material que el gabinete, armario o caja, cumpliendo con las especificaciones indicadas en el punto 6.1.2. de este pliego.\n6.1.4 Las protecciones sólo serán accesibles abriendo la puerta exterior la que deberá permanecer cerrada, para lo cual se deberá contar con un dispositivo que permita el cierre y cuando corresponda, deberá ser cerrado con llave."
+     }
+    ]
+   },
+   {
+    "id": "T2",
+    "texto": "Ninguna parte energizada expuesta al operar: cubierta cubre equipos completa y barras desnudas con barrera",
+    "sev": "alta",
+    "refs": [
+     {
+      "ref": "RIC N°2 · 6.1.8, 6.2.3",
+      "url": "https://www.sec.cl/sitio-web/wp-content/uploads/2021/06/RIC-N02-Tableros-Electricos-170621-2.pdf#page=8",
+      "t": "6.1.8 La cubierta cubre equipos tendrá por finalidad principal, impedir el contacto de cuerpos extraños con las partes energizadas, o bien, que partes energizadas queden al alcance del usuario al operar las protecciones o dispositivos de maniobra.\n6.2.3 Toda barra de distribución desnuda deberá estar protegida mediante una barrera o material que impida el contacto directo con la superficie de las barras, en ningún caso se considerará la cubierta cubre equipo como un único elemento de protección. El elemento que cubra las barras desnudas debe tener el símbolo de riesgo eléctrico indicado en el anexo 2.2 y deberán contar con una identificación según su uso (normal, emergencia, especial de uso fotovoltaico, etc.)"
+     }
+    ]
+   },
+   {
+    "id": "T3",
+    "texto": "Envolvente íntegra: sin perforaciones, corrosión avanzada ni partes faltantes; no es un tablero de tipo abierto",
+    "sev": "media",
+    "refs": [
+     {
+      "ref": "RIC N°2 · 6.1.2, 6.1.7",
+      "url": "https://www.sec.cl/sitio-web/wp-content/uploads/2021/06/RIC-N02-Tableros-Electricos-170621-2.pdf#page=8",
+      "t": "6.1.2 Los materiales empleados en la construcción de gabinetes, armarios o cajas que formen parte de la envolvente de los tableros eléctricos, deberán ser no propagadores de la llama, resistentes a la corrosión o estar adecuadamente protegidos contra ella, en conformidad con lo definido en los protocolos de análisis y/o ensayos de seguridad de productos eléctricos respectivos establecidos por la Superintendencia.\n6.1.7 Tanto la envolvente como la tapa de un tablero, deberá ser capaz de resistir los esfuerzos mecánicos, eléctricos y térmicos, para los que fueron diseñados."
+     }
+    ]
+   },
+   {
+    "id": "T4",
+    "texto": "Placa del tablero visible: marca, nombre, tensión de servicio y corriente nominal",
+    "sev": "baja",
+    "refs": [
+     {
+      "ref": "RIC N°2 · 5.3.5",
+      "url": "https://www.sec.cl/sitio-web/wp-content/uploads/2021/06/RIC-N02-Tableros-Electricos-170621-2.pdf#page=5",
+      "t": "5.3.5 Todos los tableros, sin excepción, deberán llevar estampada en forma visible, legible e indeleble la marca de fabricación, el nombre del tablero, la tensión de servicio, la corriente nominal y el número de fases. El responsable de la instalación deberá agregar en su oportunidad su nombre o marca registrada. Marca de Fabricación: Nombre del Tablero: (Ejemplo: TGAux A. y F.) Tipo de servicio: (Normal o Emergencia) Tensión de servicio: Corriente nominal: Empresa desarrolladora: Año de instalación: Grado de Protección IP: Tipo de ambiente para el que fue diseñado en caso de ser un tablero especial:"
+     }
+    ]
+   },
+   {
+    "id": "T5",
+    "texto": "Protecciones rotuladas con número de circuito y servicio, y cuadro indicador de circuitos",
+    "sev": "media",
+    "refs": [
+     {
+      "ref": "RIC N°2 · 5.3.6.1, 5.3.7",
+      "url": "https://www.sec.cl/sitio-web/wp-content/uploads/2021/06/RIC-N02-Tableros-Electricos-170621-2.pdf#page=5",
+      "t": "5.3.6.1 Cuadro indicador y rotulado para identificar los circuitos, su número y su función.\n5.3.7 Todas las protecciones y aparatos de maniobra deberán ser rotulados indicando cuál es su Número de circuito y servicio."
+     }
+    ]
+   },
+   {
+    "id": "T6",
+    "texto": "Diagrama unilineal adherido y legible",
+    "sev": "baja",
+    "refs": [
+     {
+      "ref": "RIC N°2 · 5.3.6.2",
+      "url": "https://www.sec.cl/sitio-web/wp-content/uploads/2021/06/RIC-N02-Tableros-Electricos-170621-2.pdf#page=5",
+      "t": "5.3.6.2 Diagrama unilineal actualizado, de tamaño legible, y con protección permanente para mantener su condición."
+     }
+    ]
+   },
+   {
+    "id": "T7",
+    "texto": "Cableado sin conexiones de dispositivo a dispositivo ni puentes improvisados; peines con todos sus accesorios",
+    "sev": "media",
+    "refs": [
+     {
+      "ref": "RIC N°2 · 6.2.4",
+      "url": "https://www.sec.cl/sitio-web/wp-content/uploads/2021/06/RIC-N02-Tableros-Electricos-170621-2.pdf#page=11",
+      "t": "6.2.4 No se aceptará el cableado de un tablero con conexiones hechas de dispositivo a dispositivo, con la salvedad de:"
+     }
+    ]
+   },
+   {
+    "id": "T8",
+    "texto": "Gabinete metálico con conexión visible al conductor de protección (tierra)",
+    "sev": "alta",
+    "refs": [
+     {
+      "ref": "RIC N°2 · 6.4.1, 6.4.2, 6.4.3",
+      "url": "https://www.sec.cl/sitio-web/wp-content/uploads/2021/06/RIC-N02-Tableros-Electricos-170621-2.pdf#page=13",
+      "t": "6.4.1 Todo tablero deberá contar con la conexión a un sistema de puesta a tierra adecuado, que\n6.4.2 Si la caja, gabinete o armario que contiene a un tablero es metálico, deberá protegerse contra tensiones peligrosas.\n6.4.3 Las conexiones a tierra de un tablero deberán asegurar una continuidad eléctrica entre éste y el conductor de protección, cumpliendo con lo dispuesto en el Pliego Técnico Normativo RIC N°06."
+     }
+    ]
+   },
+   {
+    "id": "T9",
+    "texto": "Espacio frente al tablero libre: sin materiales, muebles ni combustible almacenado",
+    "sev": "media",
+    "refs": [
+     {
+      "ref": "RIC N°2 · 5.4.7",
+      "url": "https://www.sec.cl/sitio-web/wp-content/uploads/2021/06/RIC-N02-Tableros-Electricos-170621-2.pdf#page=7",
+      "t": "5.4.7 Los espacios libres y de trabajo de estos recintos no podrán ser usados como lugares de almacenamiento de ningún tipo de material, equipo o mobiliario, ni como recinto de estadía de personal."
+     }
+    ]
+   },
+   {
+    "id": "T10",
+    "texto": "Sin tuberías ni medidores de agua o gas en el recinto del tablero",
+    "sev": "media",
+    "refs": [
+     {
+      "ref": "RIC N°2 · 5.4.8",
+      "url": "https://www.sec.cl/sitio-web/wp-content/uploads/2021/06/RIC-N02-Tableros-Electricos-170621-2.pdf#page=7",
+      "t": "5.4.8 En este tipo de recintos no podrán instalarse tuberías o equipos de medida de otros servicios tales como agua potable o gas."
+     }
+    ]
+   },
+   {
+    "id": "T11",
+    "texto": "Ingreso de conductores sin romper la envolvente; en exterior sin techo, los conductores entran por abajo",
+    "sev": "baja",
+    "refs": [
+     {
+      "ref": "RIC N°2 · 6.1.21.6",
+      "url": "https://www.sec.cl/sitio-web/wp-content/uploads/2021/06/RIC-N02-Tableros-Electricos-170621-2.pdf#page=10",
+      "t": "6.1.21.6 El acoplamiento de canalizaciones o ingreso de conductores a tableros, se deberá realizar de forma de mantener el grado IP de la envolvente y el conjunto. Cuando los tableros estén instalados al exterior y no estén bajo techo, todas sus canalizaciones y conductores ingresen por la parte inferior, conservando su índice de protección IP."
+     }
+    ]
+   }
+  ],
+  "bodega_sustancias": [
+   {
+    "id": "B1",
+    "texto": "Envases en buen estado: sin corrosión avanzada, abolladuras graves ni fugas",
+    "sev": "media",
+    "refs": [
+     {
+      "ref": "DS 43 · art. 9",
+      "url": "https://www.bcn.cl/leychile/navegar?idNorma=1088802&idParte=9689283",
+      "t": "Artículo 9.- Las sustancias peligrosas deberán estar contenidas en envases, debidamente etiquetadas según lo estipulado en el Título XII del presente reglamento, excepto aquellas que se almacenen a granel.\n   Los envases de las sustancias deberán estar diseñados de forma que impidan las pérdidas de contenido; deben ser adecuados para su conservación, ser de un material químicamente compatible con la sustancia, de difícil ruptura y que minimice eventuales accidentes."
+     }
+    ]
+   },
+   {
+    "id": "B2",
+    "texto": "Envases etiquetados, con etiqueta legible en español",
+    "sev": "media",
+    "refs": [
+     {
+      "ref": "DS 43 · art. 9",
+      "url": "https://www.bcn.cl/leychile/navegar?idNorma=1088802&idParte=9689283",
+      "t": "Artículo 9.- Las sustancias peligrosas deberán estar contenidas en envases, debidamente etiquetadas según lo estipulado en el Título XII del presente reglamento, excepto aquellas que se almacenen a granel.\n   Los envases de las sustancias deberán estar diseñados de forma que impidan las pérdidas de contenido; deben ser adecuados para su conservación, ser de un material químicamente compatible con la sustancia, de difícil ruptura y que minimice eventuales accidentes."
+     },
+     {
+      "ref": "DS 43 · art. 183",
+      "url": "https://www.bcn.cl/leychile/navegar?idNorma=1088802&idParte=9689480",
+      "t": "Artículo 183.- Los envases y los envases/embalajes se etiquetarán en idioma español, con letra legible. Los elementos del recuadro de seguridad deberán destacar claramente del fondo y tener un tamaño y llevar una separación que faciliten su lectura, deberán estar dispuestos en forma horizontal cuando el envase se encuentre en su posición normal."
+     }
+    ]
+   },
+   {
+    "id": "B3",
+    "texto": "Zona señalizada y demarcada, con pictogramas de las clases almacenadas",
+    "sev": "media",
+    "refs": [
+     {
+      "ref": "DS 43 · art. 30",
+      "url": "https://www.bcn.cl/leychile/navegar?idNorma=1088802&idParte=9689306",
+      "t": "Artículo 30.- La zona destinada para el almacenamiento de las sustancias peligrosas deberá estar claramente señalizada y demarcada, adicionalmente, deberá contar con el pictograma que indique las clases y divisiones de las sustancias en ella almacenadas, de acuerdo a la NCh 2190 Of.2003, oficializada por decreto Nº 43 de fecha\n23.04.2004, del Ministerio de Transporte y Telecomunicaciones.\n   Se deberá mantener una distancia de 2,4 m entre sustancias peligrosas incompatibles. Además, se deberá mantener una distancia de 1,2 m entre las sustancias peligrosas y otras sustancias o mercancías no peligrosas."
+     }
+    ]
+   },
+   {
+    "id": "B4",
+    "texto": "Control de derrames: bandejas, pretil, piso con pendiente o material absorbente a mano",
+    "sev": "alta",
+    "refs": [
+     {
+      "ref": "DS 43 · art. 21",
+      "url": "https://www.bcn.cl/leychile/navegar?idNorma=1088802&idParte=9689296",
+      "t": "Artículo 21.- El lugar donde estén almacenadas las sustancias peligrosas deberá contar con un sistema de control de derrames, que puede consistir en materiales absorbentes o bandejas de contención, y contar con un sistema manual de extinción de incendios, a base de extintores, compatibles con los productos almacenados, en que las cantidades, distribución, potencial de extinción y mantenimiento, entre otros aspectos, deberán estar de acuerdo a lo establecido en el decreto Nº 594 de 1999, del Ministerio de Salud, Reglamento sobre Condiciones Sanitarias y Ambientales Básicas en los Lugares de Trabajo."
+     },
+     {
+      "ref": "DS 43 · art. 52",
+      "url": "https://www.bcn.cl/leychile/navegar?idNorma=1088802&idParte=9689329",
+      "t": "Artículo 52.- Las bodegas para sustancias peligrosas que contengan líquidos deberán tener un sistema de control de derrames, el que podrá consistir en:\n   . Bodega auto contenida, con piso de pendiente no inferior a 0,5% que permita el escurrimiento del derrame hacia una zona de acumulación o con contención perimetral a través de soleras y/o lomos de toro.\n . Sistema de recolección conectado a una cámara de contención estanca la que tendrá un volumen equivalente al 110% del envase de mayor capacidad, con un mínimo de 1,1 m3.\n   En el caso de almacenarse sustancias incompatibles, se deberá contar con sistemas de contención separados.\n   Adicionalmente, tanto las bodegas que almacenen líquidos como sólidos, deberán contar con agentes de absorción y/o neutralización."
+     }
+    ]
+   },
+   {
+    "id": "B5",
+    "texto": "Extintores presentes, visibles y sin obstáculos",
+    "sev": "alta",
+    "refs": [
+     {
+      "ref": "DS 43 · art. 21",
+      "url": "https://www.bcn.cl/leychile/navegar?idNorma=1088802&idParte=9689296",
+      "t": "Artículo 21.- El lugar donde estén almacenadas las sustancias peligrosas deberá contar con un sistema de control de derrames, que puede consistir en materiales absorbentes o bandejas de contención, y contar con un sistema manual de extinción de incendios, a base de extintores, compatibles con los productos almacenados, en que las cantidades, distribución, potencial de extinción y mantenimiento, entre otros aspectos, deberán estar de acuerdo a lo establecido en el decreto Nº 594 de 1999, del Ministerio de Salud, Reglamento sobre Condiciones Sanitarias y Ambientales Básicas en los Lugares de Trabajo."
+     },
+     {
+      "ref": "DS 594 · art. 47",
+      "url": "https://www.bcn.cl/leychile/navegar?idNorma=167766&idParte=8643132",
+      "t": "Artículo 47: Los extintores se ubicarán en sitios de fácil acceso y clara identificación, libres de cualquier obstáculo, y estarán en condiciones de funcionamiento máximo. Se colocarán a una altura máxima de 1,30 metros, medidos desde el suelo hasta la base del extintor y estarán debidamente señalizados."
+     }
+    ]
+   },
+   {
+    "id": "B6",
+    "texto": "Sustancias incompatibles separadas por barrera física o 2,4 m",
+    "sev": "alta",
+    "refs": [
+     {
+      "ref": "DS 43 · art. 22",
+      "url": "https://www.bcn.cl/leychile/navegar?idNorma=1088802&idParte=9689297",
+      "t": "Artículo 22.- Las sustancias incompatibles deberán estar separadas por alguna barrera física o una distancia de 2.4 m y no podrán compartir el mismo sistema de contención de derrames."
+     },
+     {
+      "ref": "DS 43 · art. 55",
+      "url": "https://www.bcn.cl/leychile/navegar?idNorma=1088802&idParte=9689332",
+      "t": "Artículo 55.- Las sustancias incompatibles entre sí deberán estar a una distancia mínima de 2,4 m entre ellas, la que no necesariamente debe ser libre."
+     }
+    ]
+   },
+   {
+    "id": "B7",
+    "texto": "Pilas sobre el piso de máximo 1 m de alto, salvo envases más altos o encajables",
+    "sev": "media",
+    "refs": [
+     {
+      "ref": "DS 43 · art. 56",
+      "url": "https://www.bcn.cl/leychile/navegar?idNorma=1088802&idParte=9689333",
+      "t": "Artículo 56.- Las pilas de sustancias dispuestas directamente sobre el piso tendrán como máximo un largo de 8 m, un ancho de 6 m y una altura de 1 m, excepto cuando el envase supere esta altura o cuando los envases sean del tipo encajables, en cuyo caso la altura podrá ser hasta 1,5 m.\nLa altura de estas pilas podrá ser de 2 m cuando las sustancias se encuentren en sacos y de 3,5 m cuando las sustancias se encuentren en maxisacos."
+     }
+    ]
+   },
+   {
+    "id": "B8",
+    "texto": "Piso sólido, liso e impermeable",
+    "sev": "media",
+    "refs": [
+     {
+      "ref": "DS 43 · art. 28",
+      "url": "https://www.bcn.cl/leychile/navegar?idNorma=1088802&idParte=9689304",
+      "t": "Artículo 28.- Las bodegas comunes donde se almacenen sustancias peligrosas deberán ser cerradas en su perímetro por muros, resistentes a la acción del agua, con piso sólido, liso e impermeable y no poroso. En todo caso, su diseño y características de construcción deberán ajustarse a lo señalado en la Ordenanza General de Urbanismo y Construcción (OGUC), considerando el estudio de carga combustible. Adicionalmente, estas bodegas deberán tener un sistema de contención local de derrames con agentes de absorción y/o neutralización que evite comprometer las áreas adyacentes.\n   Sin perjuicio de lo que determine la OGUC respecto a la resistencia al fuego de los muros perimetrales de la bodega, la RF mínima de éstos será de 15 minutos."
+     }
+    ]
+   },
+   {
+    "id": "B9",
+    "texto": "Cilindros en posición vertical y asegurados; llenos separados de vacíos",
+    "sev": "alta",
+    "refs": [
+     {
+      "ref": "DS 43 · art. 67",
+      "url": "https://www.bcn.cl/leychile/navegar?idNorma=1088802&idParte=9689346",
+      "t": "Artículo 67.- Los cilindros llenos deberán almacenarse separados de los vacíos. Estas distintas áreas deben estar claramente señalizadas de acuerdo a su condición de \"Cilíndros Llenos\" o \"Cilíndros Vacíos\".\nTodos los cilindros deben ser dispuestos en su posición normal de uso o almacenamiento y sujetos, encadenados a la pared o con una baranda o sistema que impida su volcamiento."
+     }
+    ]
+   }
+  ],
+  "correa_transportadora": [
+   {
+    "id": "C1",
+    "texto": "Tambores, poleas y transmisiones protegidos contra el contacto",
+    "sev": "alta",
+    "refs": [
+     {
+      "ref": "DS 594 · art. 38",
+      "url": "https://www.bcn.cl/leychile/navegar?idNorma=167766&idParte=8643122",
+      "t": "Artículo 38: Deberán estar debidamente protegidas todas las partes móviles, transmisiones y puntos de operación de maquinarias y equipos."
+     },
+     {
+      "ref": "DS 132 · art. 389",
+      "url": "https://www.bcn.cl/leychile/navegar?idNorma=221064&idParte=8650122",
+      "t": "Artículo 389.- Toda polea, correa, engranaje o parte en movimiento de una máquina debe estar debidamente protegida, dejándola fuera del alcance de cualquier contacto físico con el operador, herramientas o materiales que éste manipule. Tales protecciones de seguridad deberán contar con un dispositivo que mantenga estable su posición cuando ellas están cerradas.",
+      "faena": true
+     },
+     {
+      "ref": "DS 132 · art. 638",
+      "url": "https://www.bcn.cl/leychile/navegar?idNorma=221064&idParte=10313332",
+      "t": "Artículo 638.- Todo sistema de transmisión de movimiento o correa transportadora deberá estar equipada con parada de emergencia y/o cable de seguridad, instalada a lo largo de la correa, que permita su inmediata detención en caso de emergencia. Además:\n   a. Los sistemas de transmisión mecánico deben contar con protección que impida el contacto con las personas.\n b. Donde se utilicen correas transportadoras en una faena minera, se debe mantener y aplicar procedimientos para la operación, mantención e inspección del sistema.\n c. En el sistema de transmisión mecánico, el tambor motriz y el tambor de cola deberán encontrarse protegidos  d. Todo trabajo de mantención, reparación, control y limpieza de una correa transportadora como de los sistemas que la componen, debe hacerse con ésta totalmente detenida, y el sistema de energización bloqueado.",
+      "faena": true
+     }
+    ]
+   },
+   {
+    "id": "C2",
+    "texto": "Parada de emergencia o cable de seguridad a lo largo de la correa",
+    "sev": "alta",
+    "refs": [
+     {
+      "ref": "DS 132 · art. 115",
+      "url": "https://www.bcn.cl/leychile/navegar?idNorma=221064&idParte=8649815",
+      "t": "Artículo 115.- Toda correa transportadora deberá estar equipada con elementos efectivos de seguridad, instalados a todo lo largo de la correa, que permitan una inmediata detención de ella, en caso de emergencia.\n Deberán mantenerse protegidas todas las partes en movimiento, y se realizarán revisiones periódicas de las instalaciones y uniones de la correa.",
+      "faena": true
+     },
+     {
+      "ref": "DS 132 · art. 638",
+      "url": "https://www.bcn.cl/leychile/navegar?idNorma=221064&idParte=10313332",
+      "t": "Artículo 638.- Todo sistema de transmisión de movimiento o correa transportadora deberá estar equipada con parada de emergencia y/o cable de seguridad, instalada a lo largo de la correa, que permita su inmediata detención en caso de emergencia. Además:\n   a. Los sistemas de transmisión mecánico deben contar con protección que impida el contacto con las personas.\n b. Donde se utilicen correas transportadoras en una faena minera, se debe mantener y aplicar procedimientos para la operación, mantención e inspección del sistema.\n c. En el sistema de transmisión mecánico, el tambor motriz y el tambor de cola deberán encontrarse protegidos  d. Todo trabajo de mantención, reparación, control y limpieza de una correa transportadora como de los sistemas que la componen, debe hacerse con ésta totalmente detenida, y el sistema de energización bloqueado.",
+      "faena": true
+     }
+    ]
+   },
+   {
+    "id": "C3",
+    "texto": "Nadie sobre la correa ni interviniéndola en movimiento",
+    "sev": "alta",
+    "refs": [
+     {
+      "ref": "DS 594 · art. 8",
+      "url": "https://www.bcn.cl/leychile/navegar?idNorma=167766&idParte=8643085",
+      "t": "Artículo 8°: Los pasillos de circulación serán lo suficientemente amplios de modo que permitan el movimiento seguro del personal, tanto en sus desplazamientos habituales como para el movimiento de material, sin exponerlos a accidentes. Así también, los espacios entre máquinas por donde circulen personas no deberán ser inferiores a 150 cm."
+     },
+     {
+      "ref": "DS 132 · art. 116",
+      "url": "https://www.bcn.cl/leychile/navegar?idNorma=221064&idParte=8649816",
+      "t": "Artículo 116.- Todo trabajo de mantención, reparación, control y limpieza de una correa transportadora como de los sistemas que la componen, debe hacerse con ésta totalmente detenida, y deberá tener un sistema sonoro y luminoso de advertencia que se activará antes de la puesta en marcha de ésta.",
+      "faena": true
+     }
+    ]
+   },
+   {
+    "id": "C4",
+    "texto": "Pasillos laterales libres de obstáculos",
+    "sev": "media",
+    "refs": [
+     {
+      "ref": "DS 594 · art. 7",
+      "url": "https://www.bcn.cl/leychile/navegar?idNorma=167766&idParte=8643084",
+      "t": "Artículo 7°: Los pisos de los lugares de trabajo, así como los pasillos de tránsito, se mantendrán libres de todo obstáculo que impida un fácil y seguro desplazamiento de los trabajadores, tanto en las tareas normales como en situaciones de emergencia."
+     }
+    ]
+   },
+   {
+    "id": "C5",
+    "texto": "Sin acumulación de material derramado bajo o junto a la correa",
+    "sev": "media",
+    "refs": [
+     {
+      "ref": "DS 594 · art. 11",
+      "url": "https://www.bcn.cl/leychile/navegar?idNorma=167766&idParte=8643088",
+      "t": "Artículo 11: Los lugares de trabajo deberán mantenerse en buenas condiciones de orden y limpieza.\nAdemás, deberán tomarse medidas efectivas para evitar la entrada o eliminar la presencia de insectos, roedores y otras plagas de interés sanitario."
+     }
+    ]
+   },
+   {
+    "id": "C6",
+    "texto": "Avisos de advertencia en lugares destacados",
+    "sev": "baja",
+    "refs": [
+     {
+      "ref": "DS 132 · art. 404",
+      "url": "https://www.bcn.cl/leychile/navegar?idNorma=221064&idParte=8650139",
+      "t": "Artículo 404.- Los avisos de advertencia e instrucciones destinados a restringir y advertir al personal respecto de los riesgos presentes, las limitaciones de acceso a recintos energizados y las restricciones para la intervención de sistemas deberán ser instalados en lugares destacados.",
+      "faena": true
+     }
+    ]
+   },
+   {
+    "id": "C7",
+    "texto": "Tramos inclinados de hasta 14°, o con correa de retención de material",
+    "sev": "baja",
+    "refs": [
+     {
+      "ref": "DS 132 · art. 114",
+      "url": "https://www.bcn.cl/leychile/navegar?idNorma=221064&idParte=8649814",
+      "t": "Artículo 114.- La pendiente máxima de trabajo de una correa transportadora, en tramos inclinados, será de catorce grados (14º) sexagesimales; si ésta es mayor, se deberán utilizar correas diseñadas con elementos para retención de material.",
+      "faena": true
+     }
+    ]
+   },
+   {
+    "id": "C8",
+    "texto": "Estructura y polines sin daño visible",
+    "sev": "media",
+    "refs": [
+     {
+      "ref": "DS 594 · art. 36",
+      "url": "https://www.bcn.cl/leychile/navegar?idNorma=167766&idParte=8643119",
+      "t": "Artículo 36: Los elementos estructurales de la construcción de los locales de trabajo y todas las maquinarias, instalaciones, así como las herramientas y equipos, se mantendrán en condiciones seguras y en buen funcionamiento para evitar daño a las personas."
+     }
+    ]
+   }
+  ]
+ }
+}

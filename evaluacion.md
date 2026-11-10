@@ -1,4 +1,85 @@
-# Evaluación de las citas
+# Evaluación
+
+## Versión 2: identificar, confirmar, revisar con lista (10 de noviembre de 2026)
+
+Medición sobre las 13 fotos de ejemplo, corridas con el flujo completo y guardadas tal como salieron. Cuando la máquina preguntó, se respondió lo que una persona respondería mirando la foto.
+
+### Identificación del equipo
+
+| Medida | Resultado |
+|---|---|
+| Primera respuesta correcta | 11 de 13 |
+| Errores que llegaron a la revisión sin que la máquina preguntara | 0 |
+| Fotos en que preguntó | 4 (2 innecesarias: el equipo estaba bien identificado, pero el acercamiento vio pocos rasgos) |
+| Tipo final correcto | 13 de 13 |
+
+Los dos errores de la primera respuesta: una caja de fusibles abierta tomada por medidor (el acercamiento vio 1 de 5 rasgos de medidor y preguntó) y una correa inclinada tomada por máquina (el subtipo decía «correa transportadora» y la regla de contradicción preguntó).
+
+| # | Foto | Equipo real | Primera respuesta | Rasgos al acercar | ¿Preguntó? | Tipo final |
+|---|---|---|---|---|---|---|
+| 1 | Medidor en poste, Lonquimay | Medidor y empalme | Medidor y empalme (95 %) | 2 de 5 | no | Medidor y empalme |
+| 2 | Banco de medidores | Medidor y empalme | Medidor y empalme (95 %) | 2 de 5 | no | Medidor y empalme |
+| 3 | Caja eléctrica abierta | Tablero eléctrico | Medidor y empalme (85 %) | 1 de 5 | sí | Tablero eléctrico |
+| 4 | Sala de tableros | Tablero eléctrico | Tablero eléctrico (92 %) | 2 de 4 | no | Tablero eléctrico |
+| 5 | Tablero en obra | Tablero eléctrico | Tablero eléctrico (90 %) | 4 de 4 | no | Tablero eléctrico |
+| 6 | Tablero con paja | Tablero eléctrico | Tablero eléctrico (95 %) | 3 de 4 | no | Tablero eléctrico |
+| 7 | Tambores en pallets | Sustancias peligrosas | Sustancias peligrosas (95 %) | 3 de 3 | no | Sustancias peligrosas |
+| 8 | Tambores apilados | Sustancias peligrosas | Sustancias peligrosas (95 %) | 2 de 3 | no | Sustancias peligrosas |
+| 9 | Tambores oxidados | Sustancias peligrosas | Sustancias peligrosas (95 %) | 1 de 3 | sí | Sustancias peligrosas |
+| 10 | Máquina textil | Máquina | Máquina (92 %) | 2 de 3 | no | Máquina |
+| 11 | Correa en planta | Correa transportadora | Máquina (85 %) | 3 de 3 | sí | Correa transportadora |
+| 12 | Persona sobre correas | Correa transportadora | Correa transportadora (90 %) | 1 de 3 | sí | Correa transportadora |
+| 13 | Taller | Área de trabajo | Área de trabajo (85 %) | 3 de 3 | no | Área de trabajo |
+
+### Revisión con lista
+
+| Medida | Resultado |
+|---|---|
+| Puntos revisados | 105 |
+| Cumple | 11 |
+| No cumple | 24 |
+| No se ve en la foto | 70 |
+| «No cumple» que se miraron de cerca | 29 |
+| Corregidos al acercar (bajaron a cumple o no se ve) | 5 |
+| Hallazgos fuera de lista | 13, 11 con artículo; la revisión crítica descartó 1 citas |
+| Tiempo por foto | 30 s mediana, entre 11 y 51 s |
+
+La mayoría de los puntos queda en «no se ve». Es lo esperado: una foto no muestra el sello, el ducto del alimentador o la tierra del gabinete, y la máquina lo dice en vez de adivinar. En las pruebas con la foto del medidor, sin el acercamiento ni la verificación ciega el modelo marcaba hasta 5 incumplimientos que cambiaban de una corrida a otra; con ambos, dos corridas seguidas coincidieron.
+
+### Pendiente: revisión experta de cada «no cumple»
+
+Los artículos de la lista están asignados de antemano, así que la cita no puede salir equivocada; lo que falta medir es si cada «no cumple» es real. Esa revisión la hace un instalador o experto en prevención, foto por foto:
+
+| # | Punto | Exige | Norma | Lo que vio la máquina | Revisión experta |
+|---|---|---|---|---|---|
+| 2 | M2 | Caja de empalme íntegra: sin roturas, perforaciones ni tapa forzada | RIC N°1 · 6.5 | Cajas de empalme con tapas faltantes, óxido severo y estructura deteriorada; no están íntegras. | pendiente |
+| 3 | T1 | Puerta exterior y cubierta cubre equipos presentes y cerradas; las protecciones solo se alcanzan abriendo la puerta | RIC N°2 · 6.1.3, 6.1.4 | No existe puerta ni cubierta; los equipos y protecciones están expuestos directamente. | pendiente |
+| 3 | T2 | Ninguna parte energizada expuesta al operar: cubierta cubre equipos completa y barras desnudas con barrera | RIC N°2 · 6.1.8, 6.2.3 | Barras y bornes energizados están expuestos sin barrera ni cubierta que los proteja al operar. | pendiente |
+| 3 | T3 | Envolvente íntegra: sin perforaciones, corrosión avanzada ni partes faltantes; no es un tablero de tipo abierto | RIC N°2 · 6.1.2, 6.1.7 | Es un tablero de tipo abierto: caja sin tapa, con perforaciones, corrosión y partes faltantes. | pendiente |
+| 3 | T7 | Cableado sin conexiones de dispositivo a dispositivo ni puentes improvisados; peines con todos sus accesorios | RIC N°2 · 6.2.4 | Se observan conexiones improvisadas y puentes con conductores sueltos dentro de la caja; no se confirman peines con todos sus accesorios. | pendiente |
+| 4 | T3 | Envolvente íntegra: sin perforaciones, corrosión avanzada ni partes faltantes; no es un tablero de tipo abierto | RIC N°2 · 6.1.2, 6.1.7 | La envolvente muestra perforaciones, manchas de humedad/corrosión y desgaste en varios paneles; no es un tablero de tipo abierto, pero su integridad está comprometida. | pendiente |
+| 5 | T1 | Puerta exterior y cubierta cubre equipos presentes y cerradas; las protecciones solo se alcanzan abriendo la puerta | RIC N°2 · 6.1.3, 6.1.4 | La puerta está abierta y no cubre los equipos; las protecciones están expuestas sin necesidad de abrir nada. | pendiente |
+| 5 | T2 | Ninguna parte energizada expuesta al operar: cubierta cubre equipos completa y barras desnudas con barrera | RIC N°2 · 6.1.8, 6.2.3 | Con la puerta abierta se ven partes energizadas expuestas y no se aprecia barrera sobre barras desnudas. | pendiente |
+| 5 | T7 | Cableado sin conexiones de dispositivo a dispositivo ni puentes improvisados; peines con todos sus accesorios | RIC N°2 · 6.2.4 | Se ven conexiones de dispositivo a dispositivo y puentes improvisados; los peines no tienen todos sus accesorios. | pendiente |
+| 5 | T10 | Sin tuberías ni medidores de agua o gas en el recinto del tablero | RIC N°2 · 5.4.8 | Hay tuberías con medidores y manómetros de agua o gas justo debajo y al costado del tablero. | pendiente |
+| 6 | T1 | Puerta exterior y cubierta cubre equipos presentes y cerradas; las protecciones solo se alcanzan abriendo la puerta | RIC N°2 · 6.1.3, 6.1.4 | El tablero no tiene puerta ni cubierta cerrada; los equipos y protecciones están expuestos directamente. | pendiente |
+| 6 | T2 | Ninguna parte energizada expuesta al operar: cubierta cubre equipos completa y barras desnudas con barrera | RIC N°2 · 6.1.8, 6.2.3 | No hay cubierta que cubra los equipos; se ven bornes, bornes de disyuntores y cableado energizado al descubierto. | pendiente |
+| 6 | T3 | Envolvente íntegra: sin perforaciones, corrosión avanzada ni partes faltantes; no es un tablero de tipo abierto | RIC N°2 · 6.1.2, 6.1.7 | La envolvente tiene perforaciones y deterioro en los bordes; el interior está expuesto y no es un tablero cerrado tipo industrial. | pendiente |
+| 6 | T7 | Cableado sin conexiones de dispositivo a dispositivo ni puentes improvisados; peines con todos sus accesorios | RIC N°2 · 6.2.4 | El cableado es un enredo de conductores sin orden, con empalmes visibles y material extraño dentro del gabinete; no se confirman peines con todos sus accesorios. | pendiente |
+| 7 | B1 | Envases en buen estado: sin corrosión avanzada, abolladuras graves ni fugas | DS 43 · art. 9 | Se observan envases con corrosión avanzada y abolladuras graves, especialmente en las filas inferiores centrales y laterales. | pendiente |
+| 7 | B7 | Pilas sobre el piso de máximo 1 m de alto, salvo envases más altos o encajables | DS 43 · art. 56 | Los envases están apilados en más de 5 niveles sobre pallets, superando los 2 metros de altura, excediendo el límite de 1 m para pilas sobre el piso. | pendiente |
+| 8 | B1 | Envases en buen estado: sin corrosión avanzada, abolladuras graves ni fugas | DS 43 · art. 9 | Los envases presentan corrosión avanzada, abolladuras y deterioro visible en varias superficies. | pendiente |
+| 9 | B1 | Envases en buen estado: sin corrosión avanzada, abolladuras graves ni fugas | DS 43 · art. 9 | Los envases presentan corrosión avanzada, abolladuras y óxido generalizado; varios muestran signos de posible fuga o deterioro estructural. | pendiente |
+| 9 | B2 | Envases etiquetados, con etiqueta legible en español | DS 43 · art. 9, DS 43 · art. 183 | No se observan etiquetas legibles en español en ninguno de los envases; solo hay pintura de colores sin información de contenido ni peligros. | pendiente |
+| 9 | B3 | Zona señalizada y demarcada, con pictogramas de las clases almacenadas | DS 43 · art. 30 | No hay señalización ni demarcación de zona de almacenamiento, ni pictogramas de clases de peligro visibles en el entorno. | pendiente |
+| 9 | B4 | Control de derrames: bandejas, pretil, piso con pendiente o material absorbente a mano | DS 43 · art. 21, DS 43 · art. 52 | No se ven bandejas de contención, pretiles, piso con pendiente ni material absorbente a mano para control de derrames. | pendiente |
+| 9 | B7 | Pilas sobre el piso de máximo 1 m de alto, salvo envases más altos o encajables | DS 43 · art. 56 | Los envases están apilados en múltiples niveles, superando claramente el metro de altura, sin ser encajables ni contar con estiba segura. | pendiente |
+| 12 | C3 | Nadie sobre la correa ni interviniéndola en movimiento | DS 594 · art. 8, DS 132 · art. 116 · referencia, rige en faena minera | Una persona está de pie sobre la correa transportadora con las manos en las caderas, interviniendo directamente el equipo. | pendiente |
+| 12 | C5 | Sin acumulación de material derramado bajo o junto a la correa | DS 594 · art. 11 | Hay acumulación de material derramado blanco y suciedad bajo y junto a la correa, visible en los laterales y entre los rieles. | pendiente |
+
+## Versión 1: visión abierta y búsqueda de citas (9 de noviembre de 2026)
+
+Primera versión, reemplazada por la versión 2. Se conserva porque muestra por qué se cambió: los errores venían de hallazgos débiles de la visión, no del buscador.
 
 Primera medición del Supervisor normativo sobre las 11 fotos de ejemplo (49 hallazgos). Cada cita se revisó a mano contra el texto del artículo: ¿exige directamente lo que el hallazgo incumple?
 
@@ -16,7 +97,7 @@ Primera medición del Supervisor normativo sobre las 11 fotos de ejemplo (49 hal
 - Una abstención fue un error del modelo: en el hallazgo 7.2 el buscador sí trajo el DS 43 art. 52 (control de derrames) y no lo eligió. Las otras tres abstenciones son razonables.
 - La revisión es manual, todavía sin validación de un experto en prevención de riesgos, y con 11 fotos. Sirve para ver por dónde mejorar, no como cifra de desempeño.
 
-## Detalle
+### Detalle
 
 | # | Tipo | Hallazgo | Cita elegida | Resultado |
 |---|---|---|---|---|

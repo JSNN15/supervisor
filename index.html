@@ -760,6 +760,154 @@
         font-size: 0.8rem;
         color: #333;
       }
+      #forzar {
+        font: inherit;
+        font-size: 0.86rem;
+        padding: 8px 10px;
+        border-radius: 7px;
+        border: 1px solid var(--line);
+        background: var(--panel);
+        color: var(--fg);
+        max-width: 100%;
+      }
+      #forzar.pulse {
+        outline: 2px solid var(--acc);
+      }
+      .ident {
+        background: var(--panel2);
+        border-radius: 9px;
+        padding: 10px 12px;
+        font-size: 0.92rem;
+      }
+      .ident .lbl,
+      .lbl {
+        display: block;
+        font-family: var(--mono);
+        font-size: 0.68rem;
+        color: var(--muted);
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        margin: 6px 0 2px;
+      }
+      .ident b {
+        font-size: 1.05rem;
+      }
+      .badges {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin-top: 6px;
+      }
+      .badges span {
+        font-family: var(--mono);
+        font-size: 0.68rem;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        padding: 2px 8px;
+        color: var(--muted);
+      }
+      .ident details {
+        margin-top: 6px;
+        font-size: 0.84rem;
+        color: var(--muted);
+      }
+      .ident ul {
+        margin: 2px 0;
+        padding-left: 18px;
+      }
+      .ras li.si::marker {
+        content: '✓ ';
+        color: var(--ok);
+      }
+      .ras li.no::marker {
+        content: '✗ ';
+        color: var(--alta);
+      }
+      .ras li.no_claro::marker {
+        content: '? ';
+        color: var(--media);
+      }
+      .lnk {
+        font: inherit;
+        font-size: 0.8rem;
+        background: none;
+        border: 0;
+        padding: 0;
+        margin-top: 8px;
+        color: var(--acc);
+        text-decoration: underline;
+        cursor: pointer;
+      }
+      .grp {
+        margin: 6px 0 0;
+        font-size: 0.86rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+      .grp span {
+        text-transform: none;
+        letter-spacing: 0;
+        font-weight: 400;
+        color: var(--muted);
+        font-size: 0.8rem;
+        margin-left: 6px;
+      }
+      .f .ver,
+      .f .actua {
+        font-size: 0.8rem;
+        color: var(--muted);
+      }
+      .f .ver::before {
+        content: '✓ ';
+        color: var(--ok);
+      }
+      .pid {
+        font-family: var(--mono);
+        font-size: 0.74rem;
+        color: var(--muted);
+      }
+      .ref.sin {
+        border-bottom: 0;
+        color: var(--muted);
+      }
+      .ref.sin::after {
+        content: '';
+      }
+      .cae {
+        display: block;
+        margin-top: 4px;
+        font-size: 0.78rem;
+      }
+      .lst summary {
+        cursor: pointer;
+      }
+      .lst li small {
+        display: block;
+        color: var(--muted);
+      }
+      .preg {
+        background: var(--panel2);
+        border: 1px solid var(--acc);
+        border-radius: 9px;
+        padding: 12px;
+      }
+      .preg p {
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
+      .preg .ops {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      .preg select {
+        font: inherit;
+        padding: 8px;
+        border-radius: 7px;
+        background: var(--bg);
+        color: var(--fg);
+        border: 1px solid var(--line);
+      }
       .normas {
         border-top: 1px solid var(--line);
       }
@@ -915,8 +1063,9 @@
         <div>
           <h1>Cada hallazgo, <em>con su artículo.</em></h1>
           <p class="sub">
-            Elige el tipo de inspección y saca una foto. La IA describe lo que ve, un buscador encuentra el
-            artículo del DS 594, DS 132, DS 43 o RIC que aplica, y tú confirmas antes de firmar.
+            Saca una foto. La IA identifica el equipo y lo confirma de cerca, lo revisa contra su lista de
+            puntos con el artículo del RIC, DS 594, DS 132 o DS 43 ya asignado, y tú confirmas antes de
+            firmar.
           </p>
         </div>
         <span class="nvb">visión y citas con <b>NVIDIA Nemotron</b></span>
@@ -948,15 +1097,12 @@
             </div>
           </div>
           <div class="bar">
-            <div class="chips" id="tipos" role="radiogroup" aria-label="Tipo de inspección">
-              <button class="chip on" data-t="electrico" role="radio" aria-checked="true">
-                Instalación eléctrica
-              </button>
-              <button class="chip" data-t="bodega" role="radio" aria-checked="false">
-                Sustancias peligrosas
-              </button>
-              <button class="chip" data-t="faena" role="radio" aria-checked="false">Faena y equipos</button>
-            </div>
+            <select id="forzar" aria-label="Tipo de equipo">
+              <option value="">Detectar el equipo automáticamente</option>
+            </select>
+            <button class="btn" id="b-again" title="Vuelve a revisar la foto en pantalla con el tipo elegido">
+              Revisar de nuevo
+            </button>
             <span class="sp"></span>
             <button class="btn p" id="b-cam">
               <svg
@@ -1010,8 +1156,11 @@
             <circle cx="12" cy="12" r="5" />
           </svg>
           <div>
-            <b>1 · La IA describe</b
-            ><span>Nemotron VL marca solo lo que se ve y anota lo que la foto no permite verificar.</span>
+            <b>1 · Identifica y confirma</b
+            ><span
+              >Nemotron VL dice qué equipo es y por qué; un acercamiento a la zona clave lo confirma o te
+              pregunta.</span
+            >
           </div>
         </div>
         <div class="step">
@@ -1027,10 +1176,10 @@
             <path d="M15 15l5 5" />
           </svg>
           <div>
-            <b>2 · Busca la norma</b
+            <b>2 · Revisa con la lista del equipo</b
             ><span
-              >Búsqueda semántica y por palabras sobre 2.211 fragmentos: artículos de LeyChile y pliegos
-              RIC.</span
+              >Cada punto queda en cumple, no cumple o no se ve, con su artículo asignado por una
+              persona.</span
             >
           </div>
         </div>
@@ -1047,8 +1196,11 @@
             <path d="M9 12h7M9 16h7M9 8h4" />
           </svg>
           <div>
-            <b>3 · Elige la cita</b
-            ><span>El modelo solo puede citar lo que encontró el buscador. Si nada aplica, lo dice.</span>
+            <b>3 · Verifica y busca lo demás</b
+            ><span
+              >Cada «no cumple» se mira de cerca. Lo que la lista no cubre pasa por el buscador de 2.211
+              fragmentos y una revisión crítica de la cita.</span
+            >
           </div>
         </div>
         <div class="step">
@@ -1112,70 +1264,48 @@
         const $ = (id) => document.getElementById(id);
         const COL = {alta: '#ff4d3d', media: '#f5a524', baja: '#4fd3ef'};
         const SEV = {alta: 'Alta', media: 'Media', baja: 'Baja'};
-        const TIPOS = {
-          electrico: {
-            nombre: 'Instalación eléctrica',
-            normas: ['RIC', 'DS 594', 'DS 132'],
-            fijo: [
-              'Resistencia de la puesta a tierra y continuidad de protecciones (medición)',
-              'Aislamiento de conductores (medición)',
-              'Ajuste y selectividad de las protecciones',
-              'Declaración e inscripción de la instalación en la SEC',
-              'Apriete y temperatura de conexiones (termografía)',
-            ],
-          },
-          bodega: {
-            nombre: 'Sustancias peligrosas',
-            normas: ['DS 43', 'DS 594'],
-            fijo: [
-              'Hojas de datos de seguridad y compatibilidad real de los productos',
-              'Cantidades almacenadas frente a los umbrales del DS 43',
-              'Autorización sanitaria de la bodega',
-              'Plan de emergencia y capacitación del personal',
-              'Ventilación y concentraciones ambientales (medición)',
-            ],
-          },
-          faena: {
-            nombre: 'Faena y equipos',
-            normas: ['DS 132', 'DS 594'],
-            fijo: [
-              'Ruido, polvo y sílice (mediciones del DS 594)',
-              'Paradas de emergencia, enclavamientos y frenos (prueba)',
-              'Procedimientos de bloqueo y permisos de trabajo',
-              'Capacitación y autorización de los operadores',
-              'Registro de mantenciones de los equipos',
-            ],
-          },
-        };
+        const PASOS = [
+          'Identificar',
+          'Confirmar',
+          'Revisar lista',
+          'Verificar de cerca',
+          'Otras normas',
+          'Revisión',
+        ];
         const cv = $('cv'),
           cx = cv.getContext('2d');
-        let tipo = 'electrico',
-          img = null,
+        let img = null, // imagen en pantalla
+          foto = null, // la misma imagen reducida, como dataURL, para volver a analizar
           rep = null,
-          hl = -1;
+          hl = -1,
+          forzar = '';
 
         const esc = (s) =>
           String(s ?? '').replace(
             /[&<>"]/g,
             (c) => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'})[c]
           );
+        // listas por equipo: categorías, rasgos, puntos de revisión con su artículo
+        let LISTAS = null;
+        const getL = () =>
+          (LISTAS ??= fetch('s/listas.json').then((r) => {
+            if (!r.ok) throw new Error('no se pudieron cargar las listas');
+            return r.json();
+          }));
+        getL().then((d) => {
+          $('forzar').innerHTML =
+            '<option value="">Detectar el equipo automáticamente</option>' +
+            Object.entries(d.categorias)
+              .map(([k, c]) => `<option value="${k}">${esc(c.nombre)}</option>`)
+              .join('');
+        });
+        $('forzar').addEventListener('change', (e) => (forzar = e.target.value));
+
         $('credits').innerHTML = SAMPLES.map((s) => `<a href="${s.link}">${esc(s.credit)}</a>`).join(' · ');
         $('thumbs').innerHTML = SAMPLES.map(
           (s, i) =>
-            `<button data-i="${i}" aria-label="Ejemplo ${i + 1}: ${TIPOS[s.kind].nombre}"><img src="${s.img}" alt="" loading="lazy"></button>`
+            `<button data-i="${i}" aria-label="Ejemplo ${i + 1}: ${esc(s.title)}"><img src="${s.img}" alt="" loading="lazy"></button>`
         ).join('');
-        const setTipo = (t) => {
-          tipo = t;
-          [...$('tipos').children].forEach((c) => {
-            const on = c.dataset.t === t;
-            c.classList.toggle('on', on);
-            c.setAttribute('aria-checked', on);
-          });
-        };
-        $('tipos').addEventListener('click', (e) => {
-          const b = e.target.closest('.chip');
-          if (b) setTipo(b.dataset.t);
-        });
 
         // ---------- dibujo de la foto con los hallazgos ----------
         const draw = () => {
@@ -1184,19 +1314,21 @@
           cv.width = Math.round(img.naturalWidth * s);
           cv.height = Math.round(img.naturalHeight * s);
           cx.drawImage(img, 0, 0, cv.width, cv.height);
-          if (!rep) return;
+          if (!rep || !rep.marcas) return;
           const W = cv.width,
             H = cv.height,
             lw = Math.max(3, W / 300),
             fs = Math.max(18, W / 40);
-          rep.hallazgos.forEach((f, i) => {
-            if (f.revision === 'no' || !Array.isArray(f.caja) || f.caja.length !== 4) return;
-            let [x1, y1, x2, y2] = f.caja.map(Number);
+          rep.marcas.forEach((m) => {
+            if (m.h.revision === 'no' || !Array.isArray(m.caja) || m.caja.length !== 4) return;
+            let [x1, y1, x2, y2] = m.caja.map(Number);
             if ([x1, y1, x2, y2].some(isNaN)) return;
+            // una caja que cubre casi toda la foto no ubica nada: no se dibuja
+            if ((x2 - x1) * (y2 - y1) > 800000) return;
             [x1, x2] = [(x1 / 1000) * W, (x2 / 1000) * W];
             [y1, y2] = [(y1 / 1000) * H, (y2 / 1000) * H];
-            const c = COL[f.severidad] || COL.baja,
-              on = hl === i;
+            const c = COL[m.sev] || COL.baja,
+              on = hl === m.n;
             cx.globalAlpha = hl >= 0 && !on ? 0.25 : 1;
             cx.fillStyle = c + (on ? '33' : '14');
             cx.fillRect(x1, y1, x2 - x1, y2 - y1);
@@ -1219,7 +1351,7 @@
             cx.font = `700 ${Math.round(fs)}px IBM Plex Mono, monospace`;
             cx.textAlign = 'center';
             cx.textBaseline = 'middle';
-            cx.fillText(i + 1, px, py + 1);
+            cx.fillText(m.n, px, py + 1);
             cx.globalAlpha = 1;
           });
         };
@@ -1346,157 +1478,7 @@
           return d;
         };
         const pick = (d) => ({norma: d.norma, ref: d.ref, h: d.h, t: d.t, url: d.url});
-        // un mismo artículo o sección puede venir en varios fragmentos: se muestra una vez
         const unicos = (ds) => ds.filter((d, i) => ds.findIndex((x) => x.ref === d.ref) === i);
-
-        // las tres etapas: visión → búsqueda → cita elegida entre lo encontrado
-        const pipeline = async (data, t, step) => {
-          const t0 = performance.now();
-          const idx = loadIdx();
-          step(0);
-          const v = await post('/supervisa', {image: data, tipo: t});
-          const r = v.result || {};
-          const hs = (Array.isArray(r.hallazgos) ? r.hallazgos : []).slice(0, 6);
-          const out = {
-            tipo: t,
-            resumen: r.resumen || '',
-            corresponde: r.corresponde !== false,
-            cumple: (r.cumple || []).slice(0, 4),
-            no_evaluable: (r.no_evaluable || []).slice(0, 5),
-            hallazgos: hs.map((h) => ({
-              titulo: h.titulo,
-              observacion: h.observacion,
-              severidad: COL[h.severidad] ? h.severidad : 'media',
-              caja: h.caja,
-              busqueda: h.busqueda,
-              citas: [],
-            })),
-            modelos: [v.model.split('/').pop()],
-          };
-          if (!out.hallazgos.length) return {...out, ms: performance.now() - t0};
-          step(1);
-          const I = await idx;
-          const cands = await Promise.all(
-            out.hallazgos.map(async (h) => {
-              const q = `${h.busqueda || ''}. ${h.titulo || ''}`;
-              const e = await post('/embed', {text: q, dim: 512});
-              return search(I, `${q} ${h.observacion || ''}`, e.vectors[0], TIPOS[t].normas);
-            })
-          );
-          step(2);
-          let citas = [];
-          try {
-            const c = await post('/cita', {
-              tipo: t,
-              items: out.hallazgos.map((h, k) => ({
-                titulo: h.titulo,
-                observacion: h.observacion,
-                cands: cands[k].map((i) => ({id: 'c' + i, ref: I.docs[i].ref, texto: I.docs[i].t})),
-              })),
-            });
-            citas = (c.result && c.result.citas) || [];
-            out.modelos.push(c.model.split('/').pop());
-          } catch (err) {
-            out.aviso =
-              'No se pudo elegir la cita (' + err.message + '). Se muestran los artículos encontrados.';
-          }
-          out.hallazgos.forEach((h, k) => {
-            const c = citas.find((x) => +x.h === k + 1) || {};
-            // solo se aceptan ids que el buscador entregó para este hallazgo
-            const ids = (c.ids || [])
-              .map((x) => +String(x).replace(/\D/g, ''))
-              .filter((i) => cands[k].includes(i));
-            h.citas = unicos([...new Set(ids)].map((i) => pick(I.docs[i]))).slice(0, 2);
-            h.exigencia = h.citas.length ? c.exigencia || '' : '';
-            h.accion = c.accion || '';
-            h.confianza = h.citas.length ? c.confianza || 'media' : 'baja';
-            h.revisados = unicos(cands[k].map((i) => pick(I.docs[i]))).filter(
-              (d) => !h.citas.some((c) => c.ref === d.ref)
-            );
-          });
-          return {...out, ms: performance.now() - t0};
-        };
-
-        // ---------- informe en pantalla ----------
-        const pasos = (k) =>
-          `<div class="pasos">${['Visión', 'Búsqueda', 'Cita', 'Revisión']
-            .map((p, i) => `<span class="${i < k ? 'ok' : i === k ? 'on' : ''}">${i + 1} · ${p}</span>`)
-            .join('')}</div>`;
-        const citaHTML = (h) => {
-          if (!h.citas.length)
-            return `<div class="cit none">Ningún artículo encontrado lo exige de forma directa. Revisar con el prevencionista.${
-              h.revisados && h.revisados.length
-                ? `<details><summary>Artículos revisados (${h.revisados.length})</summary>${h.revisados.map((d) => `<div><a class="ref" href="${esc(d.url)}" target="_blank" rel="noopener">${esc(d.ref)}</a></div>`).join('')}</details>`
-                : ''
-            }</div>`;
-          return `<div class="cit"><div class="refs">${h.citas
-            .map(
-              (d) => `<a class="ref" href="${esc(d.url)}" target="_blank" rel="noopener">${esc(d.ref)}</a>`
-            )
-            .join('')}<span class="conf ${esc(h.confianza)}">confianza ${esc(h.confianza)}</span></div>${
-            h.exigencia ? `<p class="exi">${esc(h.exigencia)}</p>` : ''
-          }${h.citas
-            .map(
-              (d) =>
-                `<details><summary>Texto de ${esc(d.ref)}</summary><p class="txt">${esc(d.t.length > 900 ? d.t.slice(0, 900) + '…' : d.t)}</p><small>${esc(d.h)}</small></details>`
-            )
-            .join('')}</div>`;
-        };
-        const revisados = () => rep.hallazgos.filter((h) => h.revision).length;
-        const show = (r, fuente) => {
-          rep = r;
-          rep.fuente = fuente;
-          hl = -1;
-          draw();
-          const hs = r.hallazgos;
-          const fijo = TIPOS[r.tipo].fijo;
-          $('res').innerHTML = `${pasos(hs.length ? 3 : 4)}
-            <p class="resumen">${esc(r.resumen)}</p>
-            ${r.corresponde ? '' : `<p class="cit none">La foto no parece una inspección de tipo «${esc(TIPOS[r.tipo].nombre)}». Cambia el tipo arriba y vuelve a analizar.</p>`}
-            ${r.aviso ? `<p class="cit none">${esc(r.aviso)}</p>` : ''}
-            ${hs
-              .map(
-                (
-                  h,
-                  i
-                ) => `<div class="f${h.revision === 'no' ? ' no' : ''}" data-i="${i}"><div class="num" style="background:${COL[h.severidad]}">${i + 1}</div><div>
-                <h3>${esc(h.titulo)} <span class="sev" style="background:${COL[h.severidad]};color:#000">${SEV[h.severidad]}</span></h3>
-                <p>${esc(h.observacion)}</p>${citaHTML(h)}
-                ${h.accion ? `<p class="acc">${esc(h.accion)}</p>` : ''}
-                <div class="rev" role="group" aria-label="Revisión del hallazgo ${i + 1}">
-                  <button data-v="ok" aria-pressed="${h.revision === 'ok'}">Confirmo</button><button data-v="no" aria-pressed="${h.revision === 'no'}">Descarto</button>
-                </div></div></div>`
-              )
-              .join('')}
-            ${r.cumple.length ? `<div class="lst"><b>Se ve bien</b><ul>${r.cumple.map((x) => `<li>${esc(x)}</li>`).join('')}</ul></div>` : ''}
-            <div class="lst"><b>La foto no permite verificar</b><ul>${r.no_evaluable.map((x) => `<li>${esc(x)}</li>`).join('')}</ul>
-              <details><summary>Siempre requiere terreno o documento (${fijo.length})</summary><ul>${fijo.map((x) => `<li>${esc(x)}</li>`).join('')}</ul></details></div>
-            <div class="firma"><input id="quien" placeholder="Revisado por (nombre y cargo)" autocomplete="name" value="${esc(r.revisor || '')}"><button class="btn p" id="b-inf">Informe</button></div>
-            <div class="meta"><span>${esc(fuente)}</span><span>${(r.modelos || []).map(esc).join(' + ')}${r.ms ? ' · ' + (r.ms / 1000).toFixed(1).replace('.', ',') + ' s' : ''}</span></div>`;
-          $('res')
-            .querySelectorAll('.f')
-            .forEach((el) => {
-              const i = +el.dataset.i;
-              el.addEventListener('mouseenter', () => ((hl = i), draw()));
-              el.addEventListener('mouseleave', () => ((hl = -1), draw()));
-              el.querySelectorAll('.rev button').forEach((b) =>
-                b.addEventListener('click', () => {
-                  const h = rep.hallazgos[i];
-                  h.revision = h.revision === b.dataset.v ? null : b.dataset.v;
-                  rep.revisor = $('quien').value;
-                  show(rep, rep.fuente);
-                })
-              );
-            });
-          $('quien').addEventListener('input', (e) => (rep.revisor = e.target.value));
-          $('b-inf').onclick = informe;
-        };
-
-        const busy = (on, msg) => {
-          ['veil', 'scan', 'status'].forEach((id) => $(id).classList.toggle('on', on));
-          $('status').textContent = msg || '';
-          document.querySelectorAll('.btn,.chip,.thumbs button').forEach((b) => (b.disabled = on));
-        };
         const load = (src) =>
           new Promise((ok, ko) => {
             const i = new Image();
@@ -1504,8 +1486,410 @@
             i.onerror = ko;
             i.src = src;
           });
+        // recorte ampliado de una zona (coordenadas 0–1000), con margen, para mirar de cerca
+        const recorte = async (data, caja) => {
+          const im = await load(data);
+          const W = im.naturalWidth,
+            H = im.naturalHeight,
+            m = 0.08;
+          const x1 = Math.max(0, caja[0] / 1000 - m) * W,
+            y1 = Math.max(0, caja[1] / 1000 - m) * H,
+            x2 = Math.min(1, caja[2] / 1000 + m) * W,
+            y2 = Math.min(1, caja[3] / 1000 + m) * H;
+          const w = Math.max(32, x2 - x1),
+            h = Math.max(32, y2 - y1),
+            k = Math.min(3, 1024 / Math.max(w, h));
+          const c = document.createElement('canvas');
+          c.width = Math.round(w * k);
+          c.height = Math.round(h * k);
+          c.getContext('2d').drawImage(im, x1, y1, w, h, 0, 0, c.width, c.height);
+          return c.toDataURL('image/jpeg', 0.88);
+        };
+        const caja4 = (c) =>
+          Array.isArray(c) && c.length === 4 && c.every((x) => isFinite(x)) && c[2] > c[0] && c[3] > c[1];
+
+        // ---------- el pipeline: identificar → confirmar → revisar lista → verificar de cerca → otras normas ----------
+        const pipeline = async (data, step, preguntar) => {
+          const d = await getL();
+          const t0 = performance.now();
+          const out = {etapas: {}};
+          let id;
+          if (forzar) {
+            id = {
+              categoria: forzar,
+              subtipo: '',
+              entorno: 'no_claro',
+              descripcion: 'Tipo elegido a mano.',
+              evidencia: [],
+              alternativas: [],
+              confianza: 1,
+              caja_clave: [],
+            };
+            out.forzado = true;
+          } else {
+            step(0);
+            const r = await post('/identifica', {image: data});
+            id = r.result;
+            out.razonado = r.razonado;
+            out.etapas.identificar = r.ms;
+          }
+          out.ident = id;
+          let cat = id.categoria;
+          const C0 = d.categorias[cat];
+          if (C0 && !forzar) {
+            step(1);
+            const zona = caja4(id.caja_clave) ? await recorte(data, id.caja_clave) : data;
+            const c = await post('/confirma', {image: zona, nombre: C0.nombre, rasgos: C0.rasgos});
+            out.etapas.confirmar = c.ms;
+            const rasgos = C0.rasgos.map((t, i) => {
+              const x = (c.result.rasgos || []).find((y) => +y.i === i + 1) || {
+                visto: 'no_claro',
+                detalle: '',
+              };
+              return {t, visto: x.visto, detalle: x.detalle};
+            });
+            const vistos = rasgos.filter((x) => x.visto === 'si').length;
+            // la confirmación la decide una regla, no el modelo: al menos 2 rasgos propios a la vista
+            // si el subtipo nombra otro equipo con lista propia, la identificación se contradice: se pregunta
+            const OTRO = {
+              correa_transportadora: /correa|cinta transportadora/i,
+              tablero: /tablero/i,
+              medidor_empalme: /medidor/i,
+              bodega_sustancias: /tambor|bid[oó]n|sustancia/i,
+            };
+            const choca = Object.entries(OTRO).find(([k, re]) => k !== cat && re.test(id.subtipo || ''));
+            if (choca)
+              id.alternativas = [
+                {categoria: choca[0], por_que_no: `el subtipo dice «${id.subtipo}»`},
+                ...(id.alternativas || []),
+              ];
+            out.confirmacion = {
+              rasgos,
+              vistos,
+              choca: choca ? choca[0] : null,
+              ok: vistos >= Math.min(2, rasgos.length) && id.confianza >= 0.6 && !choca,
+            };
+          }
+          if ((out.confirmacion && !out.confirmacion.ok) || (!C0 && !forzar)) {
+            const elegida = await preguntar(cat, id, out.confirmacion);
+            if (elegida !== cat) out.corregido = {de: cat, a: elegida};
+            cat = elegida;
+          }
+          const C = d.categorias[cat] || {
+            nombre: 'Otro equipo',
+            familia: 'faena',
+            normas: ['DS 594', 'DS 132', 'RIC', 'DS 43'],
+            no_foto: [],
+          };
+          Object.assign(out, {
+            categoria: cat,
+            nombre: C.nombre,
+            familia: C.familia,
+            subtipo: id.subtipo || '',
+            entorno: id.entorno || 'no_claro',
+          });
+          const concentrado = /concentr|banco|varios|m[uú]ltiple/i.test(out.subtipo);
+          const lista = (d.listas[cat] || []).filter(
+            (x) => !x.solo || !x.solo.subtipo || (x.solo.subtipo === 'concentrado') === concentrado
+          );
+          out.fuera = (d.listas[cat] || []).filter((x) => !lista.includes(x)).map((x) => x.id);
+
+          step(2);
+          const zoom = caja4(id.caja_clave) ? await recorte(data, id.caja_clave) : null;
+          const v = await post('/revisa', {
+            image: data,
+            zoom,
+            nombre: C.nombre,
+            subtipo: out.subtipo,
+            entorno: out.entorno,
+            items: lista.map((x) => ({id: x.id, texto: x.texto})),
+          });
+          out.etapas.revisar = v.ms;
+          const R = v.result || {};
+          out.resumen = R.resumen || '';
+          const faena = out.entorno === 'faena_minera';
+          out.puntos = lista.map((x) => {
+            const p = (R.puntos || []).find((q) => q.id === x.id) || {
+              estado: 'no_se_ve',
+              observacion: 'Sin respuesta para este punto.',
+              caja: [],
+            };
+            return {
+              ...x,
+              refs: x.refs.map((r) =>
+                r.faena && !faena ? {...r, ref: r.ref + ' · referencia, rige en faena minera'} : r
+              ),
+              estado: p.estado,
+              observacion: p.observacion,
+              caja: caja4(p.caja) ? p.caja : [],
+            };
+          });
+
+          // cada "no cumple" se mira de cerca; si el acercamiento no lo sostiene, baja de estado
+          step(3);
+          const malos = out.puntos.filter((p) => p.estado === 'no_cumple');
+          await Promise.all(
+            malos.slice(0, 5).map(async (p) => {
+              try {
+                const z = caja4(p.caja) ? await recorte(data, p.caja) : data;
+                const w = await post('/verifica', {image: z, texto: p.texto, nombre: C.nombre});
+                p.verificado = true;
+                if (w.result.estado !== 'no_cumple') {
+                  p.corregido = {de: 'no_cumple', obs: p.observacion};
+                  p.estado = w.result.estado;
+                  p.observacion = w.result.observacion;
+                } else p.cerca = w.result.observacion;
+              } catch {
+                p.verificado = false;
+              }
+            })
+          );
+
+          // hallazgos que la lista no cubre: buscador + cita elegida entre lo encontrado + revisión crítica
+          step(4);
+          // un hallazgo adicional que repite un punto de la lista se descarta (el modelo a veces insiste)
+          const pal = (t) => new Set(toks(t));
+          const repite = (o) => {
+            if (o.repite && lista.some((x) => x.id === o.repite.trim())) return true;
+            const a = pal(o.titulo);
+            return lista.some((x) => {
+              const b = pal(x.texto);
+              const comun = [...a].filter((w) => b.has(w)).length;
+              return comun / (a.size || 1) >= 0.5;
+            });
+          };
+          // sin lista, el modelo a veces deja los hallazgos en "puntos": se recuperan como adicionales
+          const fuente =
+            (R.otros || []).length || lista.length
+              ? R.otros || []
+              : (R.puntos || [])
+                  .filter((q) => q.estado === 'no_cumple')
+                  .map((q) => ({
+                    titulo: q.id,
+                    observacion: q.observacion,
+                    severidad: 'media',
+                    caja: q.caja,
+                    busqueda: q.observacion,
+                  }));
+          const otros = fuente
+            .filter((o) => !repite(o))
+            .slice(0, lista.length ? 3 : 5)
+            .map((o) => ({
+              titulo: o.titulo,
+              observacion: o.observacion,
+              severidad: COL[o.severidad] ? o.severidad : 'media',
+              caja: caja4(o.caja) ? o.caja : [],
+              busqueda: o.busqueda,
+              citas: [],
+              revisados: [],
+            }));
+          if (otros.length) {
+            const I = await loadIdx();
+            const cands = await Promise.all(
+              otros.map(async (h) => {
+                const q = `${h.busqueda || ''}. ${h.titulo || ''}`;
+                const e = await post('/embed', {text: q, dim: 512});
+                return search(I, `${q} ${h.observacion || ''}`, e.vectors[0], C.normas);
+              })
+            );
+            try {
+              const c = await post('/cita', {
+                tipo: C.nombre,
+                items: otros.map((h, k) => ({
+                  titulo: h.titulo,
+                  observacion: h.observacion,
+                  cands: cands[k].map((i) => ({id: 'c' + i, ref: I.docs[i].ref, texto: I.docs[i].t})),
+                })),
+              });
+              const citas = (c.result && c.result.citas) || [];
+              otros.forEach((h, k) => {
+                const x = citas.find((y) => +y.h === k + 1) || {};
+                const ids = (x.ids || [])
+                  .map((s) => +String(s).replace(/\D/g, ''))
+                  .filter((i) => cands[k].includes(i));
+                h.citas = unicos([...new Set(ids)].map((i) => pick(I.docs[i]))).slice(0, 2);
+                h.exigencia = h.citas.length ? x.exigencia || '' : '';
+                h.accion = x.accion || '';
+                h.confianza = h.citas.length ? x.confianza || 'media' : 'baja';
+                h.revisados = unicos(cands[k].map((i) => pick(I.docs[i]))).filter(
+                  (dd) => !h.citas.some((cc) => cc.ref === dd.ref)
+                );
+              });
+              const pares = [];
+              otros.forEach((h, k) =>
+                h.citas.forEach((cc, j) =>
+                  pares.push({k, j, titulo: h.titulo, observacion: h.observacion, ref: cc.ref, texto: cc.t})
+                )
+              );
+              if (pares.length) {
+                const cr = await post('/critica', {pares, equipo: C.nombre});
+                (cr.result.veredictos || []).forEach((vv) => {
+                  const p = pares[+vv.i - 1];
+                  if (p && vv.sostiene === false) {
+                    const h = otros[p.k];
+                    h.citas[p.j].cae = vv.motivo || 'no exige directamente lo observado';
+                  }
+                });
+                otros.forEach((h) => {
+                  h.descartadas = h.citas.filter((cc) => cc.cae);
+                  h.citas = h.citas.filter((cc) => !cc.cae);
+                  if (!h.citas.length) h.exigencia = '';
+                });
+              }
+            } catch (err) {
+              out.aviso = 'No se pudo elegir la cita de los hallazgos adicionales (' + err.message + ').';
+            }
+          }
+          out.otros = otros;
+          out.no_foto = C.no_foto || [];
+          out.ms = Math.round(performance.now() - t0);
+          return out;
+        };
+
+        // ---------- informe en pantalla ----------
+        const pasos = (k) =>
+          `<div class="pasos">${PASOS.map((p, i) => `<span class="${i < k ? 'ok' : i === k ? 'on' : ''}">${i + 1} · ${p}</span>`).join('')}</div>`;
+        const refsHTML = (refs) =>
+          `<div class="refs">${refs
+            .map((r) =>
+              r.url
+                ? `<a class="ref" href="${esc(r.url)}" target="_blank" rel="noopener">${esc(r.ref)}</a>`
+                : `<span class="ref sin">${esc(r.ref)}</span>`
+            )
+            .join('')}</div>${refs
+            .map(
+              (r) =>
+                `<details><summary>Texto de ${esc(r.ref.split(' · referencia')[0])}</summary><p class="txt">${esc(r.t.length > 900 ? r.t.slice(0, 900) + '…' : r.t)}</p></details>`
+            )
+            .join('')}`;
+        const revHTML = (h, k) =>
+          `<div class="rev" role="group" aria-label="Revisión del hallazgo ${k}"><button data-k="${k}" data-v="ok" aria-pressed="${h.revision === 'ok'}">Confirmo</button><button data-k="${k}" data-v="no" aria-pressed="${h.revision === 'no'}">Descarto</button></div>`;
+        const citaOtro = (h) => {
+          if (!h.citas.length)
+            return `<div class="cit none">Ningún artículo encontrado lo exige de forma directa. Revisar con el prevencionista.${
+              h.descartadas && h.descartadas.length
+                ? ` <span class="cae">La revisión crítica descartó ${h.descartadas.map((c) => esc(c.ref)).join(', ')}.</span>`
+                : ''
+            }</div>`;
+          return `<div class="cit">${refsHTML(h.citas)}<span class="conf ${esc(h.confianza)}">confianza ${esc(h.confianza)} · cita revisada</span>${h.exigencia ? `<p class="exi">${esc(h.exigencia)}</p>` : ''}</div>`;
+        };
+        const show = (r, fuente) => {
+          rep = r;
+          rep.fuente = fuente;
+          hl = -1;
+          const malos = r.puntos.filter((p) => p.estado === 'no_cumple');
+          // números de los hallazgos en la foto: primero los de la lista, después los adicionales
+          rep.marcas = [
+            ...malos.map((h) => ({h, sev: h.sev, caja: h.caja})),
+            ...r.otros.map((h) => ({h, sev: h.severidad, caja: h.caja})),
+          ].map((m, i) => ({...m, n: i + 1}));
+          draw();
+          const id = r.ident,
+            conf = r.confirmacion;
+          const etiqueta = r.forzado
+            ? 'elegido a mano'
+            : r.corregido
+              ? `corregido por ti (la IA dijo ${esc(((LISTAS_SYNC && LISTAS_SYNC.categorias[r.corregido.de]) || {}).nombre || r.corregido.de)})`
+              : conf
+                ? `confirmado al acercar: ${conf.vistos} de ${conf.rasgos.length} rasgos`
+                : '';
+          const ok = r.puntos.filter((p) => p.estado === 'cumple'),
+            nv = r.puntos.filter((p) => p.estado === 'no_se_ve'),
+            corr = r.puntos.filter((p) => p.corregido);
+          const ENT = (LISTAS_SYNC && LISTAS_SYNC.entornos) || {};
+          let n = 0;
+          $('res').innerHTML = `${pasos(6)}
+            <div class="ident"><div><span class="lbl">Equipo identificado</span><b>${esc(r.nombre)}</b>${r.subtipo ? ` · ${esc(r.subtipo)}` : ''}${r.entorno && r.entorno !== 'no_claro' ? ` · ${esc(ENT[r.entorno] || r.entorno)}` : ''}</div>
+              <div class="badges">${r.forzado ? '' : `<span>confianza ${Math.round((id.confianza || 0) * 100)} %</span>`}${etiqueta ? `<span>${etiqueta}</span>` : ''}${r.razonado ? '<span>con razonamiento</span>' : ''}</div>
+              ${r.forzado ? '' : `<details><summary>Por qué</summary><p>${esc(id.descripcion)}</p>${id.evidencia.length ? `<ul>${id.evidencia.map((x) => `<li>${esc(x)}</li>`).join('')}</ul>` : ''}${conf ? `<p class="lbl">Rasgos al acercar</p><ul class="ras">${conf.rasgos.map((x) => `<li class="${x.visto}">${esc(x.t)}${x.detalle ? ` <small>${esc(x.detalle)}</small>` : ''}</li>`).join('')}</ul>` : ''}${id.alternativas.length ? `<p class="lbl">Descartó</p><ul>${id.alternativas.map((a) => `<li>${esc(a.categoria)}: ${esc(a.por_que_no)}</li>`).join('')}</ul>` : ''}</details>`}
+              <button class="lnk" id="b-otro">¿No es esto? Elegir el tipo y volver a revisar</button></div>
+            <p class="resumen">${esc(r.resumen)}</p>
+            ${r.aviso ? `<p class="cit none">${esc(r.aviso)}</p>` : ''}
+            ${r.puntos.length ? `<h4 class="grp">No cumple <span>${malos.length} de ${r.puntos.length} puntos</span></h4>` : '<p class="cit none">No hay lista de revisión para este equipo todavía: se muestran solo los hallazgos visibles con su búsqueda normativa.</p>'}
+            ${malos
+              .map((h) => {
+                n++;
+                return `<div class="f${h.revision === 'no' ? ' no' : ''}" data-n="${n}"><div class="num" style="background:${COL[h.sev]}">${n}</div><div>
+                <h3><span class="pid">${esc(h.id)}</span> ${esc(h.texto)} <span class="sev" style="background:${COL[h.sev]};color:#000">${SEV[h.sev]}</span></h3>
+                <p>${esc(h.observacion)}</p>${h.verificado ? `<p class="ver">Confirmado al acercar${h.cerca ? `: ${esc(h.cerca)}` : ''}</p>` : ''}
+                <div class="cit">${refsHTML(h.refs)}</div>
+                ${h.actua ? `<p class="actua">Corrige: ${esc(h.actua)}</p>` : ''}${revHTML(h, n)}</div></div>`;
+              })
+              .join('')}
+            ${r.otros.length ? `<h4 class="grp">Otros hallazgos <span>fuera de la lista, con búsqueda normativa</span></h4>` : ''}
+            ${r.otros
+              .map((h) => {
+                n++;
+                return `<div class="f${h.revision === 'no' ? ' no' : ''}" data-n="${n}"><div class="num" style="background:${COL[h.severidad]}">${n}</div><div>
+                <h3>${esc(h.titulo)} <span class="sev" style="background:${COL[h.severidad]};color:#000">${SEV[h.severidad]}</span></h3>
+                <p>${esc(h.observacion)}</p>${citaOtro(h)}${h.accion ? `<p class="acc">${esc(h.accion)}</p>` : ''}${revHTML(h, n)}</div></div>`;
+              })
+              .join('')}
+            ${ok.length ? `<details class="lst"><summary><b>Cumple</b> · ${ok.length}</summary><ul>${ok.map((p) => `<li><b>${esc(p.id)}</b> ${esc(p.texto)}<small>${esc(p.observacion)}</small></li>`).join('')}</ul></details>` : ''}
+            ${nv.length ? `<details class="lst" open><summary><b>No se ve en la foto</b> · ${nv.length}</summary><ul>${nv.map((p) => `<li><b>${esc(p.id)}</b> ${esc(p.texto)}<small>${esc(p.observacion)}</small></li>`).join('')}</ul></details>` : ''}
+            ${corr.length ? `<div class="lst"><b>Corregidos al acercar</b><ul>${corr.map((p) => `<li><b>${esc(p.id)}</b> marcado como no cumple; de cerca quedó como «${p.estado === 'cumple' ? 'cumple' : 'no se ve'}».<small>Antes: ${esc(p.corregido.obs)}</small></li>`).join('')}</ul></div>` : ''}
+            ${r.no_foto.length ? `<details class="lst"><summary><b>Siempre requiere terreno o documento</b> · ${r.no_foto.length}</summary><ul>${r.no_foto.map((x) => `<li>${esc(x)}</li>`).join('')}</ul></details>` : ''}
+            <div class="firma"><input id="quien" placeholder="Revisado por (nombre y cargo)" autocomplete="name" value="${esc(r.revisor || '')}"><button class="btn p" id="b-inf">Informe</button></div>
+            <div class="meta"><span>${esc(fuente)}</span><span>Nemotron 3.5 Super VL${r.ms ? ' · ' + (r.ms / 1000).toFixed(1).replace('.', ',') + ' s' : ''}</span></div>`;
+          const todos = [...malos, ...r.otros];
+          $('res')
+            .querySelectorAll('.f')
+            .forEach((el) => {
+              const k = +el.dataset.n;
+              el.addEventListener('mouseenter', () => ((hl = k), draw()));
+              el.addEventListener('mouseleave', () => ((hl = -1), draw()));
+            });
+          $('res')
+            .querySelectorAll('.rev button')
+            .forEach((b) =>
+              b.addEventListener('click', () => {
+                const h = todos[+b.dataset.k - 1];
+                h.revision = h.revision === b.dataset.v ? null : b.dataset.v;
+                rep.revisor = $('quien').value;
+                show(rep, rep.fuente);
+              })
+            );
+          $('quien').addEventListener('input', (e) => (rep.revisor = e.target.value));
+          $('b-inf').onclick = informe;
+          $('b-otro').onclick = () => {
+            $('forzar').focus();
+            $('forzar').scrollIntoView({block: 'center', behavior: 'smooth'});
+            $('forzar').classList.add('pulse');
+            setTimeout(() => $('forzar').classList.remove('pulse'), 1600);
+          };
+        };
+        let LISTAS_SYNC = null;
+        getL().then((d) => (LISTAS_SYNC = d));
+
+        const busy = (on, msg) => {
+          ['veil', 'scan', 'status'].forEach((i) => $(i).classList.toggle('on', on));
+          $('status').textContent = msg || '';
+          document.querySelectorAll('.btn,.thumbs button,#forzar,#b-again').forEach((b) => (b.disabled = on));
+        };
         const skel = (k) =>
           `${pasos(k)}<div class="skel"></div><div class="skel s2"></div><div class="skel s3"></div><div class="skel s3"></div>`;
+
+        // pregunta a la persona cuando la identificación no se confirma
+        const preguntar = (cat, id, conf) =>
+          new Promise(async (resolve) => {
+            const d = await getL();
+            busy(false);
+            ['veil', 'scan'].forEach((i) => $(i).classList.remove('on'));
+            const opciones = [...new Set([cat, ...(id.alternativas || []).map((a) => a.categoria)])].filter(
+              (k) => d.categorias[k]
+            );
+            $('res').innerHTML = `${pasos(1)}<div class="preg"><b>¿Qué muestra la foto?</b>
+              <p>La IA cree que es <b>${esc((d.categorias[cat] || {}).nombre || cat)}</b> (confianza ${Math.round((id.confianza || 0) * 100)} %)${conf ? `, pero al acercar vio ${conf.vistos} de ${conf.rasgos.length} rasgos propios de ese equipo` : ''}. Elige para seguir:</p>
+              <div class="ops">${opciones.map((k) => `<button class="btn" data-c="${k}">${esc(d.categorias[k].nombre)}</button>`).join('')}
+              <select id="q-otra"><option value="">Otro…</option>${Object.entries(d.categorias)
+                .map(([k, c]) => `<option value="${k}">${esc(c.nombre)}</option>`)
+                .join('')}<option value="otro">Ninguno de estos</option></select></div></div>`;
+            $('res')
+              .querySelectorAll('.preg button')
+              .forEach((b) => (b.onclick = () => (busy(true, 'Revisando…'), resolve(b.dataset.c))));
+            $('q-otra').onchange = (e) =>
+              e.target.value && (busy(true, 'Revisando…'), resolve(e.target.value));
+          });
 
         // ejemplos: resultado guardado del mismo flujo, para no gastar consultas
         $('thumbs').addEventListener('click', async (e) => {
@@ -1513,46 +1897,52 @@
           if (!b) return;
           const s = SAMPLES[+b.dataset.i];
           [...$('thumbs').children].forEach((t) => t.classList.toggle('on', t === b));
-          setTipo(s.kind);
           img = await load(s.img);
+          foto = null;
           $('drop').style.display = 'none';
           rep = null;
           draw();
           $('res').innerHTML = skel(0);
           busy(true, 'Analizando…');
-          await new Promise((r) => setTimeout(r, 700));
+          await getL();
+          await new Promise((r) => setTimeout(r, 600));
           busy(false);
           show(structuredClone(s.rep), 'Resultado guardado del análisis de esta foto de ejemplo');
         });
 
-        // foto propia: se reduce a 1280 px antes de enviarla
-        const ETAPAS = ['Nemotron VL describe la foto', 'Buscando el artículo', 'Eligiendo la cita'];
-        const analyze = async (file) => {
-          if (!file || !file.type.startsWith('image/')) return;
-          img = await load(URL.createObjectURL(file));
-          $('drop').style.display = 'none';
-          rep = null;
-          draw();
-          [...$('thumbs').children].forEach((t) => t.classList.remove('on'));
-          const s = Math.min(1, 1280 / Math.max(img.naturalWidth, img.naturalHeight)),
+        // foto propia (o ejemplo que se vuelve a revisar): se reduce a 1280 px antes de enviarla
+        const ETAPAS = [
+          'Identificando el equipo',
+          'Confirmando con un acercamiento',
+          'Revisando la lista del equipo',
+          'Verificando de cerca',
+          'Buscando la norma de lo demás',
+        ];
+        const fotoDe = (im) => {
+          const s = Math.min(1, 1280 / Math.max(im.naturalWidth, im.naturalHeight)),
             c = document.createElement('canvas');
-          c.width = Math.round(img.naturalWidth * s);
-          c.height = Math.round(img.naturalHeight * s);
-          c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
+          c.width = Math.round(im.naturalWidth * s);
+          c.height = Math.round(im.naturalHeight * s);
+          c.getContext('2d').drawImage(im, 0, 0, c.width, c.height);
           let q = 0.85,
             data = c.toDataURL('image/jpeg', q);
           while (data.length > 1_500_000 && q > 0.4) data = c.toDataURL('image/jpeg', (q -= 0.1));
+          return data;
+        };
+        const correr = async () => {
+          foto = foto || fotoDe(img);
+          rep = null;
+          draw();
           busy(true, 'Enviando a NVIDIA…');
           const t0 = performance.now();
           let etapa = 0;
           const tick = setInterval(() => {
-            $('status').textContent = `${ETAPAS[etapa]}… ${((performance.now() - t0) / 1000).toFixed(0)} s`;
+            if ($('veil').classList.contains('on'))
+              $('status').textContent =
+                `${ETAPAS[etapa] || 'Revisando'}… ${((performance.now() - t0) / 1000).toFixed(0)} s`;
           }, 500);
           try {
-            const r = await pipeline(data, tipo, (k) => {
-              etapa = k;
-              $('res').innerHTML = skel(k);
-            });
+            const r = await pipeline(foto, (k) => ((etapa = k), ($('res').innerHTML = skel(k))), preguntar);
             show(r, 'Análisis en vivo');
           } catch (err) {
             $('res').innerHTML =
@@ -1562,8 +1952,17 @@
             busy(false);
           }
         };
+        const analyze = async (file) => {
+          if (!file || !file.type.startsWith('image/')) return;
+          img = await load(URL.createObjectURL(file));
+          foto = null;
+          $('drop').style.display = 'none';
+          [...$('thumbs').children].forEach((t) => t.classList.remove('on'));
+          correr();
+        };
         $('file').addEventListener('change', (e) => analyze(e.target.files[0]));
         $('cam').addEventListener('change', (e) => analyze(e.target.files[0]));
+        $('b-again').addEventListener('click', () => img && correr());
 
         // cámara en vivo; si el navegador no la permite, abre la cámara del sistema
         let stream = null,
@@ -1642,27 +2041,53 @@
         function informe() {
           rep.revisor = $('quien').value.trim();
           const n = 'INS-' + new Date().toISOString().slice(2, 10).replace(/-/g, '');
-          const pend = rep.hallazgos.length - revisados();
+          const malos = rep.puntos.filter((p) => p.estado === 'no_cumple');
+          const todos = [
+            ...malos.map((h) => ({
+              titulo: `${h.id} · ${h.texto}`,
+              obs: h.observacion,
+              sev: h.sev,
+              refs: h.refs.map((r) => r.ref),
+              debe: `Dejar conforme al punto ${h.id}${h.actua ? `; corrige ${h.actua}` : ''}`,
+              revision: h.revision,
+            })),
+            ...rep.otros.map((h) => ({
+              titulo: h.titulo,
+              obs: h.observacion,
+              sev: h.severidad,
+              refs: h.citas.map((c) => c.ref),
+              debe: h.accion || '',
+              revision: h.revision,
+              exi: h.exigencia,
+            })),
+          ].map((h, i) => ({...h, n: i + 1}));
+          const pend = todos.filter((h) => !h.revision).length;
           const firmado = rep.revisor && !pend;
-          const vivos = rep.hallazgos.map((h, i) => ({...h, n: i + 1})).filter((h) => h.revision !== 'no');
+          const lista = (est) =>
+            rep.puntos
+              .filter((p) => p.estado === est)
+              .map((p) => p.id)
+              .join(', ') || 'ninguno';
           $('ot').innerHTML = `<h2 tabindex="-1" autofocus>Informe de inspección ${n}</h2>
-            <p style="margin:2px 0 0;color:#555;font-size:.9rem">${esc(TIPOS[rep.tipo].nombre)} · ${new Date().toLocaleString('es-CL')} · Supervisor normativo (IA de apoyo)</p>
+            <p style="margin:2px 0 0;color:#555;font-size:.9rem">${esc(rep.nombre)}${rep.subtipo ? ' · ' + esc(rep.subtipo) : ''} · ${new Date().toLocaleString('es-CL')} · Supervisor normativo (IA de apoyo)</p>
             ${firmado ? `<p><b>Revisado por:</b> ${esc(rep.revisor)}</p>` : `<p class="bor">BORRADOR: ${rep.revisor ? '' : 'falta el nombre de quien revisa'}${!rep.revisor && pend ? ' y ' : ''}${pend ? `${pend} hallazgo(s) sin confirmar ni descartar` : ''}.</p>`}
             <p>${esc(rep.resumen)}</p>
-            <table><thead><tr><th>#</th><th>Hallazgo</th><th>Norma</th><th>Acción</th><th>Estado</th></tr></thead><tbody>${vivos
+            <table><thead><tr><th>#</th><th>Hallazgo</th><th>Norma</th><th>Acción</th><th>Estado</th></tr></thead><tbody>${todos
+              .filter((h) => h.revision !== 'no')
               .map(
                 (h) =>
-                  `<tr><td>${h.n}</td><td><b>${esc(h.titulo)}</b> (${SEV[h.severidad]})<br>${esc(h.observacion)}</td><td class="cita">${h.citas.length ? h.citas.map((d) => esc(d.ref)).join('<br>') + (h.exigencia ? `<br>${esc(h.exigencia)}` : '') : 'Sin artículo directo'}</td><td>${esc(h.accion || '')}</td><td>${ESTADO[h.revision] || 'Sin revisar'}</td></tr>`
+                  `<tr><td>${h.n}</td><td><b>${esc(h.titulo)}</b> (${SEV[h.sev]})<br>${esc(h.obs)}</td><td class="cita">${h.refs.length ? h.refs.map(esc).join('<br>') + (h.exi ? `<br>${esc(h.exi)}` : '') : 'Sin artículo directo'}</td><td>${esc(h.debe)}</td><td>${ESTADO[h.revision] || 'Sin revisar'}</td></tr>`
               )
               .join('')}</tbody></table>
-            <p class="cita"><b>No verificable por foto:</b> ${[...rep.no_evaluable, ...TIPOS[rep.tipo].fijo].map((x) => esc(String(x).replace(/\.\s*$/, ''))).join('; ')}.</p>
+            ${rep.puntos.length ? `<p class="cita"><b>Lista revisada:</b> cumple ${lista('cumple')} · no se ve ${lista('no_se_ve')}.</p>` : ''}
+            ${rep.no_foto.length ? `<p class="cita"><b>Requiere terreno o documento:</b> ${rep.no_foto.map(esc).join('; ')}.</p>` : ''}
             <img src="${cv.toDataURL('image/jpeg', 0.8)}" alt="Foto con hallazgos marcados">
             <p style="font-size:.8rem;color:#666">Firma: __________________ &nbsp; Fecha: __________</p>
             <div class="btns"><button id="x-cerrar">Cerrar</button><button id="x-imp">Imprimir</button><button id="x-json">Descargar JSON</button></div>`;
           $('x-cerrar').onclick = () => $('otd').close();
           $('x-imp').onclick = () => print();
           $('x-json').onclick = () => {
-            const {fuente, ...datos} = rep;
+            const {fuente, marcas, ...datos} = rep;
             const a = document.createElement('a');
             a.href = URL.createObjectURL(
               new Blob([JSON.stringify({informe: n, fecha: new Date().toISOString(), ...datos}, null, 2)], {

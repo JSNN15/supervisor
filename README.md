@@ -82,6 +82,7 @@ En 13 fotos de ejemplo ([detalle](evaluacion.md)):
 | `tools/listas.py` | Arma `s/listas.json` sacando el texto exacto de cada artículo. |
 | `tools/descargar.sh`, `tools/chunk.py`, `tools/embed.py` | Descargan los decretos desde LeyChile, los cortan por artículo y los vectorizan. |
 | `evaluacion.md` | Mediciones de la versión 2 y de la versión 1. |
+| `tools/medir.py` | Recalcula las cifras de `evaluacion.md` contando sobre los ejemplos guardados. `python3 tools/medir.py` |
 
 ```bash
 ./tools/descargar.sh && python3 tools/chunk.py && NVIDIA_API_KEY=... python3 tools/embed.py && python3 tools/listas.py

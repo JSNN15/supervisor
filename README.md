@@ -1,15 +1,15 @@
 # Supervisor normativo
 
-**Una foto de la instalación. La máquina identifica el equipo, lo confirma de cerca y lo revisa contra su lista de puntos, cada uno con el artículo del RIC, DS 594, DS 132 o DS 43 ya asignado. Una persona confirma o descarta antes de firmar.**
+**Una foto de la instalación. La herramienta identifica el equipo, lo confirma de cerca y lo revisa contra su lista de puntos, cada uno con el artículo del RIC, DS 594, DS 132 o DS 43 ya asignado. Una persona confirma o descarta antes de firmar.**
 
-[![Abrir la máquina](https://img.shields.io/badge/Probar-jsnn15.github.io%2Fsupervisor-b69cff?style=for-the-badge)](https://jsnn15.github.io/supervisor/)
+[![Abrir la herramienta](https://img.shields.io/badge/Probar-jsnn15.github.io%2Fsupervisor-b69cff?style=for-the-badge)](https://jsnn15.github.io/supervisor/)
 ![NVIDIA Nemotron](https://img.shields.io/badge/NVIDIA-Nemotron%20VL%20%2B%20Embed%20%2B%20Super-76b900?style=flat-square&logo=nvidia&logoColor=white)
 ![Normas](https://img.shields.io/badge/normas-RIC%20%C2%B7%20DS%20594%20%C2%B7%20DS%20132%20%C2%B7%20DS%2043-555?style=flat-square)
 ![Licencia](https://img.shields.io/badge/c%C3%B3digo-Apache--2.0-blue?style=flat-square)
 
 **Español** · [English](README.en.md)
 
-<a href="https://jsnn15.github.io/supervisor/"><img src="docs/captura.jpg" alt="Tablero abierto en obra: la máquina lo identifica, marca los puntos que no cumplen con el artículo del RIC N°2 y lista lo que la foto no permite ver" width="100%"></a>
+<a href="https://jsnn15.github.io/supervisor/"><img src="docs/captura.jpg" alt="Tablero abierto en obra: la herramienta lo identifica, marca los puntos que no cumplen con el artículo del RIC N°2 y lista lo que la foto no permite ver" width="100%"></a>
 
 ## El problema
 
@@ -66,7 +66,7 @@ En 13 fotos de ejemplo ([detalle](evaluacion.md)):
 
 ## Límites
 
-- Una foto muestra un momento y un ángulo; la mayoría de los puntos de un empalme o un tablero no se ven en una foto, y la máquina lo dice.
+- Una foto muestra un momento y un ángulo; la mayoría de los puntos de un empalme o un tablero no se ven en una foto, y la herramienta lo avisa.
 - El modelo sigue variando entre corridas en detalles chicos; el acercamiento y la verificación ciega lo reducen, no lo eliminan.
 - Faltan listas para sala eléctrica, transformador, cilindros y estanques, y los estándares de empalme de cada distribuidora.
 - No reemplaza al instalador autorizado ni al experto en prevención de riesgos.
@@ -75,7 +75,7 @@ En 13 fotos de ejemplo ([detalle](evaluacion.md)):
 
 | Archivo | Qué es |
 |---|---|
-| `index.html` | Interfaz y pipeline: recortes, reglas de confirmación, verificación, búsqueda, revisión e informe. |
+| `index.html` | Interfaz y flujo: recortes, reglas de confirmación, verificación, búsqueda, revisión e informe. |
 | `s/listas.json` | Equipos, rasgos para confirmar, listas de revisión con artículo, severidad y texto. |
 | `samples.js` | Fotos de ejemplo con el resultado guardado de este mismo flujo. |
 | `s/normas.json`, `s/vec.bin` | 1.116 fragmentos de DS 594, DS 132 y DS 43 con su enlace a LeyChile, y sus vectores int8. |

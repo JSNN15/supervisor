@@ -376,6 +376,33 @@
         text-align: center;
         max-width: 30ch;
       }
+      .avance {
+        margin: 10px 0 12px;
+        padding: 12px 14px;
+        background: var(--panel2);
+        border: 1px solid var(--line);
+        border-left: 3px solid var(--acc);
+        border-radius: 9px;
+        display: grid;
+        gap: 6px;
+      }
+      .avance p {
+        margin: 0;
+      }
+      .avance span {
+        margin-left: 8px;
+        color: var(--muted);
+        font-size: 0.85rem;
+      }
+      .avance .d,
+      .avance li {
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
+      .avance ul {
+        margin: 0;
+        padding-left: 18px;
+      }
       .skel {
         height: 28px;
         border-radius: 6px;
@@ -928,6 +955,11 @@
         padding-left: 18px;
         columns: 2 22rem;
       }
+          .sub.demo {
+        margin-top: 8px;
+        font-size: 0.86rem;
+        opacity: 0.8;
+      }
     </style>
     <style id="jnbar-css">
       .jnb {
@@ -1068,6 +1100,7 @@
             puntos con el artículo del RIC, DS 594, DS 132 o DS 43 ya asignado, y tú confirmas antes de
             firmar.
           </p>
+          <p class="sub demo">Demo de portafolio: usa una API gratuita compartida, con cupo diario. Una revisión completa toma cerca de medio minuto y a veces no hay cupo.</p>
         </div>
         <span class="nvb">visión y citas con <b>NVIDIA Nemotron</b></span>
       </div>
@@ -1528,7 +1561,7 @@
             };
             out.forzado = true;
           } else {
-            step(0);
+            step(0, out);
             const r = await post('/identifica', {image: data});
             id = r.result;
             out.razonado = r.razonado;
@@ -1537,8 +1570,33 @@
           out.ident = id;
           let cat = id.categoria;
           const C0 = d.categorias[cat];
+          out.creeQueEs = C0 ? C0.nombre : '';
+          // La lista de un equipo depende solo de la categoría y del subtipo. Por eso la revisión de la lista
+          // parte junto con la confirmación: si la confirmación sostiene el equipo, ya viene en camino;
+          // si no, se descarta y se revisa con el equipo que elija la persona.
+          const revisar = (k) => {
+            const Ck = d.categorias[k] || {nombre: 'Otro equipo'};
+            const conc = /concentr|banco|varios|m[uú]ltiple/i.test(id.subtipo || '');
+            const items = (d.listas[k] || []).filter(
+              (x) => !x.solo || !x.solo.subtipo || (x.solo.subtipo === 'concentrado') === conc
+            );
+            return (async () =>
+              post('/revisa', {
+                image: data,
+                zoom: caja4(id.caja_clave) ? await recorte(data, id.caja_clave) : null,
+                nombre: Ck.nombre,
+                subtipo: id.subtipo || '',
+                entorno: id.entorno || 'no_claro',
+                items: items.map((x) => ({id: x.id, texto: x.texto})),
+              }))();
+          };
+          let adelantada = null;
+          if (C0 && !forzar && id.confianza >= 0.6) {
+            adelantada = {cat, p: revisar(cat)};
+            adelantada.p.catch(() => {}); // si falla, el error se ve cuando se use
+          }
           if (C0 && !forzar) {
-            step(1);
+            step(1, out);
             const zona = caja4(id.caja_clave) ? await recorte(data, id.caja_clave) : data;
             const c = await post('/confirma', {image: zona, nombre: C0.nombre, rasgos: C0.rasgos});
             out.etapas.confirmar = c.ms;
@@ -1595,16 +1653,8 @@
           );
           out.fuera = (d.listas[cat] || []).filter((x) => !lista.includes(x)).map((x) => x.id);
 
-          step(2);
-          const zoom = caja4(id.caja_clave) ? await recorte(data, id.caja_clave) : null;
-          const v = await post('/revisa', {
-            image: data,
-            zoom,
-            nombre: C.nombre,
-            subtipo: out.subtipo,
-            entorno: out.entorno,
-            items: lista.map((x) => ({id: x.id, texto: x.texto})),
-          });
+          step(2, out);
+          const v = await (adelantada && adelantada.cat === cat ? adelantada.p : revisar(cat));
           out.etapas.revisar = v.ms;
           const R = v.result || {};
           out.resumen = R.resumen || '';
@@ -1627,9 +1677,9 @@
           });
 
           // cada "no cumple" se mira de cerca; si el acercamiento no lo sostiene, baja de estado
-          step(3);
+          step(3, out);
           const malos = out.puntos.filter((p) => p.estado === 'no_cumple');
-          await Promise.all(
+          const verificando = Promise.all(
             malos.slice(0, 5).map(async (p) => {
               try {
                 const z = caja4(p.caja) ? await recorte(data, p.caja) : data;
@@ -1644,10 +1694,9 @@
                 p.verificado = false;
               }
             })
-          );
+          ).then(() => ((out.verificados = true), step(4, out)));
 
           // hallazgos que la lista no cubre: buscador + cita elegida entre lo encontrado + revisión crítica
-          step(4);
           // un hallazgo adicional que repite un punto de la lista se descarta (el modelo a veces insiste)
           const pal = (t) => new Set(toks(t));
           const repite = (o) => {
@@ -1741,6 +1790,7 @@
               out.aviso = 'No se pudo elegir la cita de los hallazgos adicionales (' + err.message + ').';
             }
           }
+          await verificando;
           out.otros = otros;
           out.no_foto = C.no_foto || [];
           out.ms = Math.round(performance.now() - t0);
@@ -1867,8 +1917,27 @@
           $('status').textContent = msg || '';
           document.querySelectorAll('.btn,.thumbs button,#forzar,#b-again').forEach((b) => (b.disabled = on));
         };
-        const skel = (k) =>
-          `${pasos(k)}<div class="skel"></div><div class="skel s2"></div><div class="skel s3"></div><div class="skel s3"></div>`;
+        // Lo que ya se sabe se muestra apenas llega: primero el equipo, después la lista, después lo verificado.
+        const avance = (o) => {
+          if (!o || !o.ident) return '';
+          const id = o.ident;
+          const n = (e) => (o.puntos || []).filter((p) => p.estado === e).length;
+          const malos = (o.puntos || []).filter((p) => p.estado === 'no_cumple');
+          return `<div class="avance">
+            <p><b>${esc(o.nombre || o.creeQueEs || 'Equipo sin lista propia')}</b>${id.subtipo ? ' · ' + esc(id.subtipo) : ''}
+              <span>${o.confirmacion ? `confirmado al acercar: ${o.confirmacion.vistos} de ${o.confirmacion.rasgos.length} rasgos` : o.nombre ? '' : 'confirmando de cerca…'}</span></p>
+            ${id.descripcion ? `<p class="d">${esc(id.descripcion)}</p>` : ''}
+            ${
+              o.puntos
+                ? `<p class="n"><b>${n('no_cumple')}</b> no cumple · <b>${n('cumple')}</b> cumple · <b>${n('no_se_ve')}</b> no se ve
+                    <span>${o.verificados ? 'verificado de cerca; buscando otras normas…' : malos.length ? 'mirando de cerca cada «no cumple»…' : 'buscando otras normas…'}</span></p>
+                   ${malos.length ? `<ul>${malos.map((p) => `<li>${esc(p.texto)}</li>`).join('')}</ul>` : ''}`
+                : ''
+            }
+          </div>`;
+        };
+        const skel = (k, o) =>
+          `${pasos(k)}${avance(o)}<div class="skel"></div><div class="skel s2"></div><div class="skel s3"></div>`;
 
         // pregunta a la persona cuando la identificación no se confirma
         const preguntar = (cat, id, conf) =>
@@ -1943,7 +2012,7 @@
                 `${ETAPAS[etapa] || 'Revisando'}… ${((performance.now() - t0) / 1000).toFixed(0)} s`;
           }, 500);
           try {
-            const r = await pipeline(foto, (k) => ((etapa = k), ($('res').innerHTML = skel(k))), preguntar);
+            const r = await pipeline(foto, (k, o) => ((etapa = k), ($('res').innerHTML = skel(k, o))), preguntar);
             show(r, 'Análisis en vivo');
           } catch (err) {
             $('res').innerHTML =

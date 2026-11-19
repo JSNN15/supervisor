@@ -599,7 +599,7 @@ const SAMPLES = [
     "img": "s/e1.jpg",
     "title": "Caja eléctrica abierta",
     "credit": "Old Fuse Box · chrstphre · CC BY 2.0",
-    "link": "https://www.flickr.com/photos/12457246@N03/32673756057",
+    "link": "https://www.flickr.com/photos/12457246@N03/",
     "rep": {
       "etapas": {
         "identificar": 2954,
@@ -2997,7 +2997,7 @@ const SAMPLES = [
     "img": "s/f2.jpg",
     "title": "Correa en planta",
     "credit": "Factory Floor · Augapfel · CC BY 2.0",
-    "link": "https://www.flickr.com/photos/47038415@N00/3287974828",
+    "link": "https://www.flickr.com/photos/47038415@N00/",
     "rep": {
       "etapas": {
         "identificar": 3098,
